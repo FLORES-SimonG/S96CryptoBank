@@ -1,25 +1,21 @@
 import { Request, Response } from "express";
 
-
-
 export const getAllUsers = (req: Request, res: Response) => {
     res.status(200).json({ message: "LISTADO EN PROCESO" });
-    };
+};
 
 export const getUserByID = (req: Request, res: Response) => {
     res.status(200).json({ message: "LISTADO LLAMADO POR ID" });
-    };
-
-
-export const createUser = (req:Request,res:Response) => {
-    res.status(200).json({ message: "REGISTRADO" });
-    
 };
 
 
+export const createUser = (req:Request,res:Response) => {
+    res.status(200).json({ message: "REGISTRADO" });    
+};
+
 export const loginUser = (req: Request, res: Response) => {
     res.status(200).json({ message: "LOGIN" });
-    }
+}
 
 
 

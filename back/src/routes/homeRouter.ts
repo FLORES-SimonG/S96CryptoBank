@@ -4,10 +4,11 @@ import { Router } from "express";
 import appointmentRouter from "./appointmentRouters";
 import appointmentsRouter from "./appointmentsRouter";
 import userRouter from "./userRouter";
+import welcomeRouter from "./welcomeHomeRouter";
 const router:Router = Router();
 
 
-
+router.use("/", welcomeRouter);//! Ruta de bienvenida propia, se puede borrar--> Se usa Router(acá)--> se crea welcomeHomeRouter.ts--> creo controlador.
 router.use("/users", userRouter);
 router.use("/appointment", appointmentRouter);
 router.use("/appointments", appointmentsRouter);
@@ -16,5 +17,5 @@ router.use("/appointments", appointmentsRouter);
 
 
 
-export default router;//! exportamos el router para poder usarlo en el server.ts
+export default router;
 
