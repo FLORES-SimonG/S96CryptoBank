@@ -3,10 +3,12 @@ import IUser from "../interfaces/IUser";
 
 let users:IUser[] = [
     {
-        id:1,
-        name:"Simón",
-        email:"simonflores@mail.com",
-        active:true
+        id: 1,
+        name: "Simón G. Flores",
+        email: 'simonflores@mail.com',
+        birthdate: new Date(1990, 5, 15),
+        nDni: 123456789,
+        credencialsId: 987654321,
     }
 ];
 let id:number = 2;
@@ -21,7 +23,10 @@ export const createUserService = async(userData:UserDto):Promise<IUser> => {
         id,
         name:userData.name,
         email:userData.email,
-        active:userData.active
+        birthdate: new Date(userData.birthdate),
+        nDni:userData.nDni,
+        credencialsId:userData.credencialsId,
+        
     }; 
     users.push(newUser);
     id++;

@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
+import IUser from "../interfaces/IUser";
+import { createUserService, getUserService } from "../services/usersService";
 
-export const getAllUsers = (req: Request, res: Response) => {
-    res.status(200).json({ message: "LISTADO EN PROCESO" });
+export const getAllUsers = async(req: Request, res: Response) => {
+    const getUserFunction = await getUserService();
+    res.status(200).json(getUserFunction);
 };
 
 export const getUserByID = (req: Request, res: Response) => {
@@ -9,8 +12,10 @@ export const getUserByID = (req: Request, res: Response) => {
 };
 
 
-export const createUser = (req:Request,res:Response) => {
-    res.status(200).json({ message: "REGISTRADO" });    
+export const createUser = async(req:Request,res:Response) => {
+    const { id, name, email, birthdate,nDni,credencialsId } = req.body;
+    const newUser:IUser = await createUserService({ id, name, email, birthdate, nDni, credencialsId}) ;
+    res.status(201).json(newUser);    
 };
 
 export const loginUser = (req: Request, res: Response) => {
