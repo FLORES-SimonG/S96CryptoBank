@@ -1,41 +1,43 @@
 import UserDto from "../dto/UserDto";
 import IUser from "../interfaces/IUser";
+import { createCredentialsService } from "./credentialsService";
 
-let users:IUser[] = [
-    {
-        id: 1,
-        name: "Simón G. Flores",
-        email: 'simonflores@mail.com',
-        birthdate: new Date(1990, 5, 15),
-        nDni: 123456789,
-        credencialsId: 987654321,
-    }
-];
+// let users:IUser[] = [
+//     {
+//     "name": "Simón G. Flores",
+//     "email": "simonflores@mail.com",
+//     "birthdate": "20.03.1994",
+//     "nDni": 123456789,
+//     "username": "SimonGF-NOB",
+//     "password": "1234"
+//  }
+// ];
+
+let users:IUser[] = [];
 let id:number = 2;
 
-export const createUserService = async(userData:UserDto):Promise<IUser> => {
-    //recibir los datos del usuario
-    //crear un nuevo usuario
-    //incluir el nuevo usuario en el array
-    //retornar el nuevo objeto creado
+export const createUserService = (name:string, email:string, birthdate:string,
+    nDni:number, username:string, password:string):IUser => {
+    
+        const credencialsId = createCredentialsService(username,password);
+        const id=users.length+1;
+        const newUser:IUser={id,name,email,birthdate,nDni,credencialsId};
 
-    const newUser:IUser = {
-        id,
-        name:userData.name,
-        email:userData.email,
-        birthdate: new Date(userData.birthdate),
-        nDni:userData.nDni,
-        credencialsId:userData.credencialsId,
-        
-    }; 
-    users.push(newUser);
-    id++;
-    return newUser;
+     
+        users.push(newUser);
+        return newUser;
 };
+
 export const getUserService = async(): Promise<IUser[]>=> {
     return users;
 
 };
-export const deleteUserService = async(id:number):Promise<void> => {
-    users =users.filter((user:IUser) => user.id !== id);
+
+export const getUserByIdService = async(id:number):Promise<IUser|undefined> => {
+    return users.find((user:IUser) => user.id === id);
+//!throw new error 
 };
+
+// export const deleteUserService = async(id:number):Promise<void> => {
+//     users =users.filter((user:IUser) => user.id !== id);
+// };

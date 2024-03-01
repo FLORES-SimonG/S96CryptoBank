@@ -1,4 +1,3 @@
-
 interface ICredentials {
     id: number;
     username: string;
