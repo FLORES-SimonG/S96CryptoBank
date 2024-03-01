@@ -2,10 +2,6 @@
 
 import { Request, Response } from "express";
 
-
-
 export const getWelcome = (req: Request, res: Response) => {
-    res.status(200).json({ message: "BIENVENIDO" });
-    };
-
-
+  res.status(200).json({ message: "BIENVENIDO" });
+};

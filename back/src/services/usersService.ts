@@ -1,4 +1,4 @@
-import UserDto from "../dto/UserDto";
+// import UserDto from "../dto/UserDto";
 import IUser from "../interfaces/IUser";
 import { createCredentialsService } from "./credentialsService";
 
@@ -13,29 +13,35 @@ import { createCredentialsService } from "./credentialsService";
 //  }
 // ];
 
-let users:IUser[] = [];
-let id:number = 2;
+let users: IUser[] = [];
+let id: number = 0;
 
-export const createUserService = (name:string, email:string, birthdate:string,
-    nDni:number, username:string, password:string):IUser => {
-    
-        const credencialsId = createCredentialsService(username,password);
-        const id=users.length+1;
-        const newUser:IUser={id,name,email,birthdate,nDni,credencialsId};
+export const createUserService = (
+  name: string,
+  email: string,
+  birthdate: string,
+  nDni: number,
+  username: string,
+  password: string
+): IUser => {
+  const credencialsId = createCredentialsService(username, password);
+  const id = users.length + 1;
+  const newUser: IUser = { id, name, email, birthdate, nDni, credencialsId };
 
-     
-        users.push(newUser);
-        return newUser;
+  users.push(newUser);
+  return newUser;
 };
 
-export const getUserService = async(): Promise<IUser[]>=> {
-    return users;
-
+export const getUserService = async (): Promise<IUser[]> => {
+  return users;
 };
 
-export const getUserByIdService = async(id:number):Promise<IUser|undefined> => {
-    return users.find((user:IUser) => user.id === id);
-//!throw new error 
+export const getUserByIdService = async (id: number): Promise<IUser> => {
+  const user = users.find((user: IUser) => user.id === id);
+  if (!user) {
+    throw new Error(`Usuario turno con el ID ${id} no fue encontrado AMIGUIS.`);
+  }
+  return user;
 };
 
 // export const deleteUserService = async(id:number):Promise<void> => {

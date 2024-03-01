@@ -2,7 +2,7 @@
 import { Router } from "express";
 import { getWelcome } from "../controllers/welcomeHomeController";
 
-const welcomeRouter:Router = Router();
+const welcomeRouter: Router = Router();
 
-welcomeRouter.get("/",getWelcome);//! se crea welcomeHomeRouter en función de la petición(ej: GET) éste es en función de la ubicación + mensaje(controlador)--> creo controlador getWelcome.
+welcomeRouter.get("/", getWelcome); //! se crea welcomeHomeRouter en función de la petición(ej: GET) éste es en función de la ubicación + mensaje(controlador)--> creo controlador getWelcome.
 export default welcomeRouter;

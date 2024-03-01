@@ -1,16 +1,9 @@
-enum IAppointmentStatus {
-  active = "activo",
-  cancelled = "cancelado"
-}
-
-
-
 interface IAppointment {
   id: number;
-  date: Date;
+  date: string;
   time: string;
   userId: number;
-  status: IAppointmentStatus;
+  status: "active" | "cancelled";
 }
 
 export default IAppointment;
