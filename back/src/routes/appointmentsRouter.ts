@@ -1,4 +1,5 @@
 import { Router } from "express";
+import auth from "../middlewares/autenticacion";
 
 import {
   cancelAppointmentController,
@@ -10,7 +11,7 @@ import {
 const appointmentsRouter: Router = Router();
 
 appointmentsRouter.get("/", getAppointmentController);
-appointmentsRouter.post("/schedule", addAppointmentController);
+appointmentsRouter.post("/schedule",auth, addAppointmentController);
 appointmentsRouter.put("/cancel/", cancelAppointmentController);
 appointmentsRouter.put("/cancel/:id", cancelAppointmentController);
 appointmentsRouter.get("/:id", getAppointmentByIdController);
