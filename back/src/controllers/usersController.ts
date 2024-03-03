@@ -21,7 +21,7 @@ export const getUserByIDController = (req: Request, res: Response) => {
 export const createUserController = async (req: Request, res: Response): Promise<void> => {
   try {
     const { name, email, birthdate, nDni, username, password } = req.body;
-    const newUser: IUser = await createUserService(name, email, birthdate, nDni, username, password);
+    const newUser = await createUserService(name, email, birthdate, nDni, username, password);
     res.status(201).json(newUser);
   } catch (error) {
     res.status(500).json({ message: `Error en el servidor al crear el usuario: ${error}` });

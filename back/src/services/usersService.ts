@@ -17,12 +17,14 @@ import { createCredentialsService } from "./credentialsService";
 let users: IUser[] = [];
 let id: number = 0;
 
-export const createUserService = (name: string,email: string, birthdate: string, nDni: number, username: string, password: string): IUser => {
+export const createUserService = async (name: string,email: string, birthdate: string, nDni: number, username: string, password: string) => {
   const credencialsId = createCredentialsService(username, password);
   const id = users.length + 1;
-  const newUser: IUser = { id, name, email, birthdate, nDni, credencialsId };
-  users.push(newUser);
-  return newUser;
+  // const newUser: IUser = { id, name, email, birthdate, nDni, credencialsId };
+  // users.push(newUser);
+  const newUser = UserModel.create({ id,name,email,birthdate,nDni,credencialsId });
+  const result = await UserModel.save(newUser);
+  return newUser;//? O result "user" || "result"?
 };
 
 export const getUserService = async (): Promise<IUser[]> => {
