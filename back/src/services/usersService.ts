@@ -1,4 +1,5 @@
-// import UserDto from "../dto/UserDto";
+import { AppDataSource, UserModel } from "../config/data-source";
+import { User } from "../entities/User";
 import IUser from "../interfaces/IUser";
 import { createCredentialsService } from "./credentialsService";
 
@@ -16,23 +17,16 @@ import { createCredentialsService } from "./credentialsService";
 let users: IUser[] = [];
 let id: number = 0;
 
-export const createUserService = (
-  name: string,
-  email: string,
-  birthdate: string,
-  nDni: number,
-  username: string,
-  password: string
-): IUser => {
+export const createUserService = (name: string,email: string, birthdate: string, nDni: number, username: string, password: string): IUser => {
   const credencialsId = createCredentialsService(username, password);
   const id = users.length + 1;
   const newUser: IUser = { id, name, email, birthdate, nDni, credencialsId };
-
   users.push(newUser);
   return newUser;
 };
 
 export const getUserService = async (): Promise<IUser[]> => {
+  const users = await UserModel.find(); //! UserModel= AppDataSource.getRepository(User);
   return users;
 };
 
