@@ -17,7 +17,7 @@ export class User {
   @Column("integer") 
   nDni: number;
 
-  @Column() 
+  @PrimaryGeneratedColumn() 
   credencialsId: number;
 
 }

@@ -19,12 +19,12 @@ let id: number = 0;
 
 export const createUserService = async (name: string,email: string, birthdate: string, nDni: number, username: string, password: string) => {
   const credencialsId = createCredentialsService(username, password);
-  const id = users.length + 1;
+  const id = users.length ;
   // const newUser: IUser = { id, name, email, birthdate, nDni, credencialsId };
   // users.push(newUser);
   const newUser = UserModel.create({ id,name,email,birthdate,nDni,credencialsId });
   const result = await UserModel.save(newUser);
-  return newUser;//? O result "user" || "result"?
+  return newUser;
 };
 
 export const getUserService = async (): Promise<IUser[]> => {
