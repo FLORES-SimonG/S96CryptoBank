@@ -19,12 +19,13 @@ export const createUserService = async (name: string, email: string, birthdate: 
 };
 
 export const getUserService = async (): Promise<UserDto[]> => {//!cambié IUser por UserDto
-  const users = await UserModel.find(); 
+  const users = await UserModel.find({relations:{appointments:true}}); 
+
   return users;
 };
 
 export const getUserByIdService= async (id:number): Promise< User| null>=>{
-  const founduser= await UserModel.findOneBy({id});
+  const founduser= await UserModel.findOne({ where: { id }, relations: ['appointments'] });
   if(!founduser) throw Error("usuario no encontrado")
   return founduser
 }

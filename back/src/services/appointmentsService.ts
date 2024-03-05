@@ -4,7 +4,7 @@ import { AppointmentDto } from "../dto/AppointmentDto";
 export const createAppointmentService = async (createTurn: AppointmentDto) => {
   const userExist = await UserModel.findOneBy({ id: createTurn.userId });
   if (!userExist) {
-    throw Error("NO ENCONTRAMOS EL USUARIO AMIGUITO");
+    throw Error("NO ENCONTRAMOS EL USUARIO");
   }
   const newDate = await AppointmentModel.create({
     ...createTurn,
@@ -18,7 +18,9 @@ export const createAppointmentService = async (createTurn: AppointmentDto) => {
 
 export const getAllAppointmentsService = async () => {
   const appointments = await AppointmentModel.find();
-  return appointments;
+  // const appointments = await [];
+  const rta = appointments.length === 0 ? "No hay turnos" : appointments;
+  return rta;
 };
 
 export const cancelAppointmentService = async (id: number) => {

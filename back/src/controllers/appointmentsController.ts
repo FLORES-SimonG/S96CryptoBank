@@ -12,19 +12,23 @@ export const getAppointmentController = async (req: Request, res: Response) => {
   }
 };
 
-export const getAppointmentByIdController = async (req: Request,res: Response) => {
+export const getAppointmentByIdController = async (req: Request,res: Response) => {//!REVISAR ESTA MAL IMPLEMENTADO
   const appointmentId: number = parseInt(req.params.id);
   try {
     const appointmentEncontrado = await getAppointmentByIdService(appointmentId);
-    if (appointmentEncontrado) {
+
+    if (appointmentEncontrado.length !==0) {
       res.status(200).json(appointmentEncontrado);
+    }
+    else {
+      res.status(404).json({ message: "Turno no encontrado." });
     }
   } catch (error:any) {
     res.status(404).json({ message: `Problema en solicitar turnos. Error en controller :${error.message}` });
   }
 };
 
-export const addAppointmentController = async (req: Request, res: Response) => {
+export const addAppointmentController = async (req: Request, res: Response) => {//!REVISAR ESTA MAL IMPLEMENTADO
   const { date, time, userId} = req.body;
   
   if (!userId) {
@@ -43,7 +47,7 @@ export const addAppointmentController = async (req: Request, res: Response) => {
   }
 };
 
-export const cancelAppointmentController = async (req: Request, res: Response) => {
+export const cancelAppointmentController = async (req: Request, res: Response) => {//!REVISAR ESTA MAL IMPLEMENTADO
   const appointmentId: number = parseInt(req.params.id);
   try {
     const cancelledAppointment = await cancelAppointmentService(appointmentId);
