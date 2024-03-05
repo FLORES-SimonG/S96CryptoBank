@@ -1,4 +1,4 @@
-import { AppDataSource, UserModel } from "../config/data-source";
+import { UserModel } from "../config/data-source"; //! UserModel= AppDataSource.getRepository(User);
 import { User } from "../entities/User";
 import IUser from "../interfaces/IUser";
 import { createCredentialsService } from "./credentialsService";
@@ -14,31 +14,42 @@ import { createCredentialsService } from "./credentialsService";
 //  }
 // ];
 
-let users: IUser[] = [];
-let id: number = 0;
+// let users: IUser[] = [];
+// let id: number = 0;
 
-export const createUserService = async (name: string,email: string, birthdate: string, nDni: number, username: string, password: string) => {
-  const credencialsId = createCredentialsService(username, password);
-  const id = users.length ;
-  // const newUser: IUser = { id, name, email, birthdate, nDni, credencialsId };
-  // users.push(newUser);
-  const newUser = UserModel.create({ id,name,email,birthdate,nDni,credencialsId });
-  const result = await UserModel.save(newUser);
+export const createUserService = async (name: string, email: string, birthdate: string, nDni: number, username: string, password: string): Promise<User> => {
+  // Crear nuevo usuario en la base de datos
+  const newUser = UserModel.create({ name, email, birthdate, nDni });
+  await UserModel.save(newUser);
+
+  // Crear nuevas credenciales y vincularlas al nuevo usuario
+  await createCredentialsService(newUser.id, {
+    username, password,
+   
+  });
+
+  // Devolver el nuevo usuario
   return newUser;
 };
 
 export const getUserService = async (): Promise<IUser[]> => {
-  const users = await UserModel.find(); //! UserModel= AppDataSource.getRepository(User);
+  const users = await UserModel.find(); 
   return users;
 };
 
-export const getUserByIdService = async (id: number): Promise<IUser> => {
-  const user = users.find((user: IUser) => user.id === id);
-  if (!user) {
-    throw new Error(`Usuario turno con el ID ${id} no fue encontrado AMIGUIS.`);
-  }
-  return user;
-};
+// export const getUserByIdService = async (id: number) => {
+//   const user =  UserModel.findOneBy({id});
+//   if (!user) {
+//     throw new Error(`Usuario turno con el ID ${id} no fue encontrado AMIGUIS.`);
+//   }
+//   return user;
+// };
+
+export const getUserByIdService= async (id:number): Promise< User| null>=>{
+  const founduser= await UserModel.findOneBy({id});
+  if(!founduser) throw Error("usuario no encontrado")
+  return founduser
+}
 
 // export const deleteUserService = async(id:number):Promise<void> => {
 //     users =users.filter((user:IUser) => user.id !== id);

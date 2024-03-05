@@ -8,15 +8,27 @@ export const getAllUsersController = async (req: Request, res: Response) => {
   res.status(200).json(users);
 };
 //!-----------------------------TOMAR UN USUARIO ESPECIFICO POR ID------------------------------------------------------
-export const getUserByIDController = (req: Request, res: Response) => {
-  const { id } = req.params;
-  const user = getUserByIdService(parseInt(id));
-  if (user) {
-    res.status(200).json(user);
-  } else {
-    res.status(404).json({ message: "USUARIO NO ENCONTRADO AMIGO" });
+
+export const getUserById= async(req:Request, res: Response)=>{
+  const {id}= req.params;
+  try{
+      const founduser=await getUserByIdService(Number(id))
+      res.status(200).json(founduser)
   }
-};
+  catch(error:any){
+      res.status(400).json({message:error.message})
+  }
+}
+
+// export const getUserByIDController = (req: Request, res: Response) => {
+//   const { id } = req.params;
+//   const user = getUserByIdService(parseInt(id));
+//   if (user) {
+//     res.status(200).json(user);
+//   } else {
+//     res.status(404).json({ message: "USUARIO NO ENCONTRADO AMIGO" });
+//   }
+// };
 //!-----------------------------CREAR UN USUARIO-------------------------------------------------------------------------
 export const createUserController = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -31,7 +43,7 @@ export const createUserController = async (req: Request, res: Response): Promise
 export const loginUserController = async (req: Request, res: Response): Promise<void> => {
   const { username, password } = req.body;
   try {
-    const credentialsId = await validateCredentials(username, password);
+    const credentialsId = await validateCredentials({username, password});
     if (credentialsId) {
       res.status(200).json({message: `LOGIN CORRECTO, AMIGO. TOME SU ID DE LA CREDENCIAL: ${credentialsId}`});
     }

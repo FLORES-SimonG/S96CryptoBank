@@ -3,15 +3,15 @@ import { Router } from "express";
 import {
   createUserController,
   getAllUsersController,
-  getUserByIDController,
+  getUserById,
   loginUserController,
 } from "../controllers/usersController";
 
 const userRouter: Router = Router();
 
 userRouter.get("/", getAllUsersController);
+userRouter.get("/:id", getUserById);
 userRouter.post("/register", createUserController);
 userRouter.post("/login", loginUserController);
-userRouter.get("/:id", getUserByIDController);
 
 export default userRouter;

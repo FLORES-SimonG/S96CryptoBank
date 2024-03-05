@@ -1,12 +1,12 @@
 
-import IUser from "./IUser";
+// import IUser from "./IUser";
 
-interface IAppointment {
-  id: number;
-  date: string;
-  time: string;
-  userId: number; 
-  status: "active" | "cancelled";
-}
+// interface IAppointment {
+//   id: number;
+//   date: string;
+//   time: string;
+//   userId: number; 
+//   status: "active" | "cancelled";
+// }
 
-export default IAppointment;
+// export default IAppointment;

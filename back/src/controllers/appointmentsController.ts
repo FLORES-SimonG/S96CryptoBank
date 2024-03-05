@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
-import IAppointment from "../interfaces/IAppointment";
+
 import {  cancelAppointmentService,createAppointmentService, getAllAppointmentsService, getAppointmentByIdService} from "../services/appointmentsService";
+import { AppointmentDto } from "../dto/AppointmentDto";
 //!--------------------------------------------------------------------------------------------------------------------------------------------------------
 export const getAppointmentController = async (req: Request, res: Response) => {
   try {
-    const appointments: IAppointment[] = await getAllAppointmentsService();
+    const appointments = await getAllAppointmentsService();
     res.status(200).json(appointments);
   } catch (error:any) {res.status(500).json({ message: `Problemón en solicitar turnos. Error: ${error.message}` });
   }
@@ -23,16 +24,43 @@ export const getAppointmentByIdController = async (req: Request,res: Response) =
 };
 
 export const addAppointmentController = async (req: Request, res: Response) => {
-  const { date, time, userId } = req.body;
+  const { date, time, userId} = req.body;
+  
   if (!userId) {
     return res.status(400).json({ message: "Se requiere el ID del usuario para crear un turno." });
   }
   try {
-    const newAppointment = await createAppointmentService(date, time, userId);
+    const newAppointmentData : AppointmentDto = {
+                date: date,
+                time: time,
+                userId: userId
+            };
+    const newAppointment = await createAppointmentService(newAppointmentData);
     res.status(201).json(newAppointment);
   } catch (error:any) {
     res.status(500).json({message: `Problemón en CREAR el turno porque el SERVIDOR ANDA MAL CHE. Error :${error.message}`});
   }
+  // export const scheduleNewAppointment = async(req: Request, res: Response) => {
+  //   try {
+  //       // Obtener los datos de la solicitud
+  //       const { date, time, userId } = req.body;
+  //       // Verificar si se proporcionó el ID del usuario
+  //       if (!userId) {
+  //           return res.status(400).json({ message: "Se requiere el ID del usuario para crear un turno." });
+  //       }
+  //       // Crear un objeto IAppointmentDto con los datos de la solicitud
+  //       const newAppointmentData: IAppointmentDto = {
+  //           date: date,
+  //           time: time,
+  //           userId: userId
+  //       };
+  //       // Llamar a la función createAppointmentService para crear un nuevo turno
+  //       const newAppointment = await createAppointmentService(newAppointmentData);
+  //       res.status(201).json(newAppointment);
+  //   } catch (error:any) {
+  //       res.status(500).json({ message: error.message });
+  //   }
+  // };
 };
 
 export const cancelAppointmentController = async (req: Request, res: Response) => {
