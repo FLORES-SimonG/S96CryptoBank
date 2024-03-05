@@ -27,7 +27,7 @@ export const createCredentialsService = async (userId: number, credential: Crede
 export const validateCredentials = async ( credentialDto: CredentialsDto ) => {
   const findCredential =await CredentialsModel.findOneBy({ username: credentialDto.username });
   
-  if (!findCredential) throw new Error('El usuario no existe.');
+  if (!findCredential) {throw new Error('El usuario no existe.')};
 
   if(findCredential.password !== credentialDto.password) throw new Error('Contraseña incorrecta.');
 

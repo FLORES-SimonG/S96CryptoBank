@@ -3,31 +3,35 @@ import { Request, Response } from "express";
 import {  cancelAppointmentService,createAppointmentService, getAllAppointmentsService, getAppointmentByIdService} from "../services/appointmentsService";
 import { AppointmentDto } from "../dto/AppointmentDto";
 
-//!--------------------------------------------------------------------------------------------------------------------------------------------------------
+//!-----------------------------LISTA DE APPOINTMENTS-------------------------------------------------------------------------
 export const getAppointmentController = async (req: Request, res: Response) => {
   try {
     const appointments = await getAllAppointmentsService();
-    res.status(200).json(appointments);
-  } catch (error:any) {res.status(500).json({ message: `Problema en solicitar turnos. Error en controller: ${error.message}` });
+    if (appointments.length === 0) {
+      return res.status(404).json({ message: "No hay turnos disponibles." }); 
+    }
+    return res.status(200).json(appointments); 
+  } catch (error: any) {
+    return res.status(500).json({ message: `Problema en solicitar turnos. Error en controller: ${error.message}` }); 
   }
 };
-
-export const getAppointmentByIdController = async (req: Request,res: Response) => {//!REVISAR ESTA MAL IMPLEMENTADO
+//!-----------------------------TOMAR UN APPOINTMENT ESPECIFICO POR ID------------------------------------------------------
+export const getAppointmentByIdController = async (req: Request,res: Response) => {
   const appointmentId: number = parseInt(req.params.id);
   try {
     const appointmentEncontrado = await getAppointmentByIdService(appointmentId);
 
     if (appointmentEncontrado.length !==0) {
-      res.status(200).json(appointmentEncontrado);
+      return res.status(200).json(appointmentEncontrado);
     }
     else {
-      res.status(404).json({ message: "Turno no encontrado." });
+      return res.status(404).json({ message: "Turno no encontrado." });
     }
   } catch (error:any) {
     res.status(404).json({ message: `Problema en solicitar turnos. Error en controller :${error.message}` });
   }
 };
-
+//!-----------------------------CREAR UN APPOINTMENT-------------------------------------------------------------------------
 export const addAppointmentController = async (req: Request, res: Response) => {//!REVISAR ESTA MAL IMPLEMENTADO
   const { date, time, userId} = req.body;
   
@@ -46,8 +50,8 @@ export const addAppointmentController = async (req: Request, res: Response) => {
     res.status(500).json({message: `Problema en CREAR el turno. Error en sección de controller :${error.message}`});
   }
 };
-
-export const cancelAppointmentController = async (req: Request, res: Response) => {//!REVISAR ESTA MAL IMPLEMENTADO
+//!-----------------------------CANCELAR UN APPOINTMENT-------------------------------------------------------------------------
+export const cancelAppointmentController = async (req: Request, res: Response) => {
   const appointmentId: number = parseInt(req.params.id);
   try {
     const cancelledAppointment = await cancelAppointmentService(appointmentId);

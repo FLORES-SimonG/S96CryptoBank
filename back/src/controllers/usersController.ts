@@ -21,13 +21,16 @@ export const getUserById= async(req:Request, res: Response)=>{
 }
 
 //!-----------------------------CREAR UN USUARIO-------------------------------------------------------------------------
-export const createUserController = async (req: Request, res: Response): Promise<void> => {
+export const createUserController = async (req: Request, res: Response)=> {
   try {
     const { name, email, birthdate, nDni, username, password } = req.body;
-    const newUser = await createUserService(name, email, birthdate, nDni, username, password);
-    res.status(201).json(newUser);
+    if (!name || !email || !birthdate || !nDni || !username || !password) {
+      return res.status(400).json({ message: "Todos los campos son obligatorios." }); 
+    }
+    else{const newUser = await createUserService(name, email, birthdate, nDni, username, password);
+    return res.status(201).json(newUser);} 
   } catch (error) {
-    res.status(400).json({ message: `Error en el servidor al crear el usuario: ${error}` });
+    return res.status(500).json({ message: `Error en el servidor al crear el usuario: ${error}` }); 
   }
 };
 //!-----------------------------LOGEARSE-------------------------------------------------------------------------

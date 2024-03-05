@@ -18,9 +18,7 @@ export const createAppointmentService = async (createTurn: AppointmentDto) => {
 
 export const getAllAppointmentsService = async () => {
   const appointments = await AppointmentModel.find();
-  // const appointments = await [];
-  const rta = appointments.length === 0 ? "No hay turnos" : appointments;
-  return rta;
+  return appointments;
 };
 
 export const cancelAppointmentService = async (id: number) => {
