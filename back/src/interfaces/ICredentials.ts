@@ -1,7 +1,7 @@
-interface ICredentials {
-  id: number;
-  username: string;
-  password: string;
-}
+// interface ICredentials {
+//   id: number;
+//   username: string;
+//   password: string;
+// }
 
-export default ICredentials;
+// export default ICredentials;

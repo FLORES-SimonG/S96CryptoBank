@@ -1,6 +1,6 @@
 interface ICredentials {
-    username: string;
-    password: string;
-  }
+  username: string;
+  password: string;
+}
 
-  export default ICredentials;
+export default ICredentials;
