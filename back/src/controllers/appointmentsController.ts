@@ -8,11 +8,11 @@ export const getAppointmentController = async (req: Request, res: Response) => {
   try {
     const appointments = await getAllAppointmentsService();
     if (appointments.length === 0) {
-      return res.status(404).json({ message: "No hay turnos disponibles." }); 
+      throw new Error("No hay turnos disponibles.");
     }
     return res.status(200).json(appointments); 
   } catch (error: any) {
-    return res.status(500).json({ message: `Problema en solicitar turnos. Error en controller: ${error.message}` }); 
+    return res.status(500).json({ message:  error.message }); 
   }
 };
 //!-----------------------------TOMAR UN APPOINTMENT ESPECIFICO POR ID------------------------------------------------------
@@ -25,10 +25,10 @@ export const getAppointmentByIdController = async (req: Request,res: Response) =
       return res.status(200).json(appointmentEncontrado);
     }
     else {
-      return res.status(404).json({ message: "Turno no encontrado." });
+      throw new Error("No se encontró el turno solicitado.");
     }
   } catch (error:any) {
-    res.status(404).json({ message: `Problema en solicitar turnos. Error en controller :${error.message}` });
+    res.status(404).json({ message: error.message });
   }
 };
 //!-----------------------------CREAR UN APPOINTMENT-------------------------------------------------------------------------
@@ -58,9 +58,9 @@ export const cancelAppointmentController = async (req: Request, res: Response) =
     if (cancelledAppointment) {
       res.status(200).json(cancelledAppointment);
     } else {
-      res.status(404).json({ message: "Turno no encontrado para cancelar." });
+      throw new Error("No se encontró el turno solicitado para cancelar.");
     }
   } catch (error:any) {
-    res.status(500).json({ message: `Error al cancelar el turno: ${error.message}` });
+    res.status(500).json({ message: error.message });
   }
 };
