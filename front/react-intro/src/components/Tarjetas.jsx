@@ -16,7 +16,7 @@ const Tarjetas = () => {
     <div className="card green">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png" alt="btc" />
         <p className="tip">Bitcoin</p>
-        <p className="second-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium quibusdam temporibus fugiat quo cumque. Ea sequi quis ipsam? Ipsum consequatur minus non vitae officia itaque beatae voluptate provident deserunt nostrum.</p>
+        <p className="second-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, fugiat sequi assumenda facilis voluptatem et. Provident est temporibus maxime eos aliquid molestias laborum ab doloremque reiciendis sint, consequatur facere quod?</p>
     </div>
 </div>
         </>
