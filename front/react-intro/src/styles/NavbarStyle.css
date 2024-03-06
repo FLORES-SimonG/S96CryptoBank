@@ -1,0 +1,29 @@
+nav {
+    background-color: #212121;
+    color: whitesmoke;
+    border-radius: 25px;
+    padding: 4px;
+    margin: 4px;
+    
+    ul{
+        display: flex;
+        list-style: none;
+        padding: 0;
+        flex-direction: row;
+        
+        justify-content: space-around;
+        align-items: center;
+        li{
+            margin: 0 8px;
+            text-align: center;
+            a{
+                color: whitesmoke;
+                text-decoration: none;
+                &:hover{
+                    color: #4db86b;
+                    transition: 0.2s;
+                }
+            }
+        }
+    }
+}
