@@ -7,11 +7,10 @@ const Navbar = () => {
         
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/create">Beneficios</a></li>
-                <li><a href="/create">Préstamos</a></li>
-                <li><a href="/create">Seguros</a></li>
-                <li><a href="/create">Tarjetas y Cuentas</a></li>
-                <li><a href="/create">Centro de Ayuda</a></li>
+                <li><a href="/create">About us</a></li>
+                <li><a href="/create">Investors</a></li>
+                <li><a href="/create">Newsroom</a></li>
+                <li><a href="/create">Contact us</a></li>
                 <li><a href="/create">Home Banking</a></li>
             </ul>
             

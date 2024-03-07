@@ -1,10 +1,14 @@
+import { BiCalendarCheck , BiCalendarX  } from 'react-icons/bi';
+
 const CardAppointments = ({ turno: { date, time, user, status } }) => {
   return (
-    <div>
-      <p>Fecha: {date}</p>
-      <p>Hora: {time}</p>
-      <p>Usuario: {user}</p>
-      <p>Estado: {status}</p>
+    <div className="card turn">
+      <p>Date: {date}</p>
+      <p>Time: {time}</p>
+      <p>User: {user}</p>
+      <p>
+        {status === 'active' ? <BiCalendarCheck  color="green" /> : <BiCalendarX  color="red" />}
+      </p>
     </div>
   );
 };

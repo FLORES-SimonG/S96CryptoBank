@@ -9,9 +9,9 @@ const MisTurnos = () =>{
         <>
             
 
-           <div>
+           <div id="renderAppointmentsCards">
                 <h2>Mis Turnos</h2>
-                <div id="cartita">
+                <div className="cards">
                     {turnos.map((turno) => {
                         return  <CardAppointments key={turno.id} turno={turno}/>
                     }

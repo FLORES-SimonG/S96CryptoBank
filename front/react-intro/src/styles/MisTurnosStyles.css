@@ -1,16 +1,77 @@
-h2{
-    color: red;
-}
-
-#cartita{
-    color: blue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 8px;
-    div{
-        background-color: green;
-        margin: 8px;
-
+#renderAppointmentsCards{
+    
+    h2{
+        margin: 0 0 12px 0;
+        padding: 18px;
+        text-align: center;
+        color: white;
+        background-color: #4db86b;
     }
+    
+    .cards {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        justify-content: center;
+        margin: 24px 100px;
+        align-items: center;
+        align-content: center;
+        flex-wrap: wrap;
+        }
+        
+        .cards .turn {
+          background-color: #369C41;
+        }
+        
+        .cards .card {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          text-align: center;
+          height: 200px;
+          width: 224px;
+          border-radius: 10px;
+          color: white;
+          cursor: pointer;
+          transition: 400ms;
+            border: whitesmoke 1px solid;
+          
+          p{
+            overflow: hidden;
+          }
+          p:last-child {
+            margin: 0 16px;
+            background-color: whitesmoke;
+            color: rgba(0, 0, 0, 0.8);
+            border: #51a85f 2px solid;
+            border-radius: 10px;
+            padding: 4px;
+            font-size: 1em;
+            
+          }
+          p:last-child:hover{
+            box-shadow:  0 0 10px rgba(0, 0, 0, 0.5);
+            transition: 0.5s;
+          }
+        }
+        
+        .cards .card p.tip {
+          font-size: 1em;
+          font-weight: 700;
+        }
+        
+        .cards .card p.second-text {
+          font-size: .7em;
+        }
+        
+        .cards .card:hover {
+          transform: scale(1.1, 1.1);
+          background-color: #59C971;
+        }
+        
+        .cards:hover > .card:not(:hover) {
+          filter: blur(10px);
+          transform: scale(0.9, 0.9);
+        }
 }
