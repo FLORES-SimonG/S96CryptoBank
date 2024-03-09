@@ -3,8 +3,10 @@ import styles from './Register.module.css';
 
 
 const Register = () => {
+    const today = new Date().toISOString().split('T')[0];
     return(
         <div>
+            
          <Navbar></Navbar>
             <div className={styles.register}>
                             <div class={styles.formContainer}>
@@ -19,8 +21,8 @@ const Register = () => {
                                         <input type="text" name="email" id="email" placeholder=""></input>
                                     </div>
                                     <div class={styles.inputGroup}>
-                                        <label for="birthdate">Birthdate</label>
-                                        <input type="text" name="birthdate" id="birthdate" placeholder=""></input>
+                                        <label htmlFor="birthdate">Birthdate</label>
+                                        <input type="date" name="birthdate" id="birthdate" max={today} placeholder=""/>
                                     </div>
                                     <div class={styles.inputGroup}>
                                         <label for="nDni">ID-CardNumber</label>

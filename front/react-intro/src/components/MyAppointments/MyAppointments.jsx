@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import CardAppointments from "./CardAppointments.jsx";
 import styles from './MyAppointmentsStyles.module.css';
 import axios from "axios";
-// import Turnos from "../Navbar/Navbar.jsx";
+import Navbar from "../Navbar/Navbar.jsx";
 
 const MyAppointments = () =>{
     const [appointments, setAppointments] = useState([]);
@@ -14,7 +14,7 @@ const MyAppointments = () =>{
 
     return(
         <>
-        {/* <Turnos></Turnos> */}
+        <Navbar></Navbar> 
            <div  >
                 <h2>My Appointments</h2>
                 <div className={styles.cards}>
