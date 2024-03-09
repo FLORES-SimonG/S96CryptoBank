@@ -1,4 +1,5 @@
-import '../styles/NavbarStyle.css'; //!asi se incorpora!
+import '../styles/NavbarStyle.module.css'; //!asi se incorpora!
+
 const Navbar = () => {
     return (
         <>

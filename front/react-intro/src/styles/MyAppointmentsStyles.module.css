@@ -1,4 +1,4 @@
-/* #renderAppointmentsCards{
+
     
     h2{
         margin: 0 0 12px 0;
@@ -56,14 +56,14 @@
           }
         }
         
-        .cards .card p.tip {
+        /* .cards .card p.tip {
           font-size: 1em;
           font-weight: 700;
-        }
+        } */
         
-        .cards .card p.second-text {
+        /* .cards .card p.second-text {
           font-size: .7em;
-        }
+        } */
         
         .cards .card:hover {
           transform: scale(1.1, 1.1);
@@ -74,4 +74,3 @@
           filter: blur(10px);
           transform: scale(0.9, 0.9);
         }
-} */

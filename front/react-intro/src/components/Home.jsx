@@ -1,6 +1,6 @@
 import Navbar from "./Navbar";
 import Tarjetas from "./Tarjetas";
-import "../styles/HomeStyle.css";
+import "../styles/HomeStyle.module.css";
 
 const Home=()=>{
     return(

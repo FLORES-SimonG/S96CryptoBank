@@ -1,4 +1,4 @@
-#staticCardsMoney{
+
 
   .cards {
     display: flex;
@@ -44,7 +44,7 @@
       font-weight: 700;
     }
     
-    .cards .card p.second-text {
+    .cards .card p.secondText {
       font-size: .7em;
     }
     
@@ -57,4 +57,3 @@
       filter: blur(10px);
       transform: scale(0.9, 0.9);
     }
-}
