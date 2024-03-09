@@ -3,6 +3,7 @@ import './NavbarStyle.module.css'; //!asi se incorpora!
 const Navbar = () => {
     return (
         <>
+        <h1>S96 Bank</h1>
         <nav>
         {/* <p >Este es un nav</p> */}
         

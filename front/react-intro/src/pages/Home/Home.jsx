@@ -5,7 +5,6 @@ import "./HomeStyle.module.css";
 const Home=()=>{
     return(
         <>
-        <h1>S96 Bank</h1>
         <Navbar/>
         <Tarjetas/>
         </>
