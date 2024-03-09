@@ -1,6 +1,6 @@
 import 'normalize.css'
-import Home from './components/Home';
-import Turnos from "./view/MyAppointments.jsx"
+import Home from './pages/Home/Home.jsx';
+import Turnos from "./components/MyAppointments/MyAppointments.jsx"
 
 
 function App() {

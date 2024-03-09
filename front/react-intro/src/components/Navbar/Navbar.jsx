@@ -1,4 +1,4 @@
-import '../styles/NavbarStyle.module.css'; //!asi se incorpora!
+import './NavbarStyle.module.css'; //!asi se incorpora!
 
 const Navbar = () => {
     return (

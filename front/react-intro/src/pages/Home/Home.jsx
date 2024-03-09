@@ -1,6 +1,6 @@
-import Navbar from "./Navbar";
-import Tarjetas from "./Tarjetas";
-import "../styles/HomeStyle.module.css";
+import Navbar from "./../../components/Navbar/Navbar.jsx";
+import Tarjetas from "../../components/Tarjetas/Tarjetas.jsx";
+import "./HomeStyle.module.css";
 
 const Home=()=>{
     return(

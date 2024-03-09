@@ -1,5 +1,5 @@
 import { BiCalendarCheck , BiCalendarX  } from 'react-icons/bi';
-import styles from '../styles/MyAppointmentsStyles.module.css';
+import styles from './MyAppointmentsStyles.module.css';
 
 const CardAppointments = ({ turno: { date, time, user, status } }) => {
   return (

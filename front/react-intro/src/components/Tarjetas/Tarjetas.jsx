@@ -1,4 +1,4 @@
-import styles from '../styles/TarjetasStyle.module.css'; //!asi se incorpora!
+import styles from './TarjetasStyle.module.css'; //!asi se incorpora!
 const Tarjetas = () => {
     return (
         <>

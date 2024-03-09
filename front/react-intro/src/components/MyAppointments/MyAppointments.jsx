@@ -1,8 +1,8 @@
+// import '../styles/MyAppointmentsStyles.css';
 // import appointments from "../helpers/myTurns.js";
 import { useState, useEffect } from "react";
-import CardAppointments from "../components/CardAppointments.jsx";
-// import '../styles/MyAppointmentsStyles.css';
-import styles from '../styles/MyAppointmentsStyles.module.css';
+import CardAppointments from "./CardAppointments.jsx";
+import styles from './MyAppointmentsStyles.module.css';
 import axios from "axios";
 
 const MyAppointments = () =>{
