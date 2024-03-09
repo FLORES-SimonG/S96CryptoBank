@@ -3,23 +3,19 @@ import { User } from "../entities/User";
 import { Appointment } from "../entities/Appointment";
 import { Credentials } from "../entities/Credentials";
 
+import {DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER} from "./envs";
 
 export const AppDataSource = new DataSource({
     type: "postgres",
-    host: "localhost",
-    port: 5432,
-    username: "postgres",
-    password: "admin",
-    database: "demo_typeorm",
+    host: DB_HOST,
+    port: Number(DB_PORT)|| 5432,
+    username: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_NAME,
+    // dropSchema: true,    
     synchronize: true,
-    // dropSchema: true,
-    logging: ["error"],
+    logging: false,
     entities: [User, Appointment, Credentials],
     subscribers: [],
     migrations: [],
 })
-
-export const UserModel= AppDataSource.getRepository(User);  
-export const AppointmentModel= AppDataSource.getRepository(Appointment);
-export const CredentialsModel= AppDataSource.getRepository(Credentials);
-

@@ -11,17 +11,18 @@ export class User {
   @Column({length: 100})
   name: string;
 
-  @Column({length: 100}) 
+  @Column({unique: true}) 
   email: string;
 
   @Column() 
   birthdate: string;
 
-  @Column("integer") 
+  @Column({unique: true}) 
   nDni: number;
 
-  @PrimaryGeneratedColumn() 
-  credencialsId: number;
+  @OneToOne (()=> Credentials)
+    @JoinColumn()
+    credential: Credentials["id"]
 
   @OneToMany(()=> Appointment, (appointment) =>appointment.user)
   appointments: Appointment[]

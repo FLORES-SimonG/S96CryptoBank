@@ -1,31 +1,17 @@
-
-import { CredentialsModel } from "../config/data-source";
+import { CredentialsRepository } from "../Repositories/CredentialRepository";
 import CredentialsDto from "../dto/CredentialsDto";
-import { UserModel } from "../config/data-source";
+import { UserRepository } from "../Repositories/UserRepository";
+import { Credentials } from "../entities/Credentials";
 
 
+export const createCredentialsService= async (createCredentialDto: CredentialsDto):Promise<Credentials>=>{
+  const newCredential= CredentialsRepository.create(createCredentialDto)
+  await CredentialsRepository.save(newCredential)
+  return newCredential
+}
 
-export const createCredentialsService = async (userId: number, credential: CredentialsDto): Promise<CredentialsDto> => { //!CAMBIÉ ACÁ (ICredentials => CredentialsDto)
-  //! Crear nuevas credenciales en la base de datos
-  const newCredentials = CredentialsModel.create(credential);
-  await CredentialsModel.save(newCredentials);
-
-  // !Asociar las credenciales con el usuario correspondiente
-  const user = await UserModel.findOneBy({ id: userId });
-  if (!user) {
-      throw new Error("Usuario no encontrado");
-  }
-
-  // Vincular el ID de las nuevas credenciales al usuario
-  user.credencialsId = newCredentials.id;
-  await UserModel.save(user);
-
-  // Devolver las nuevas credenciales
-  return newCredentials;
-};
-
-export const validateCredentials = async ( credentialDto: CredentialsDto ) => {
-  const findCredential =await CredentialsModel.findOneBy({ username: credentialDto.username });
+export const validateCredentials = async ( credentialDto: CredentialsDto ):Promise<number> => {
+  const findCredential =await CredentialsRepository.findOneBy({ username: credentialDto.username });
   
   if (!findCredential) {throw new Error('El usuario no existe.')};
 

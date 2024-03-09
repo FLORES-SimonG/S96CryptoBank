@@ -2,56 +2,53 @@ import { Request, Response } from "express";
 
 import {  cancelAppointmentService,createAppointmentService, getAllAppointmentsService, getAppointmentByIdService} from "../services/appointmentsService";
 import { AppointmentDto } from "../dto/AppointmentDto";
+import { Appointment } from "../entities/Appointment";
 
 //!-----------------------------LISTA DE APPOINTMENTS-------------------------------------------------------------------------
-export const getAppointmentController = async (req: Request, res: Response) => {
-  try {
-    const appointments = await getAllAppointmentsService();
-    if (appointments.length === 0) {
-      throw new Error("No hay turnos disponibles.");
-    }
-    return res.status(200).json(appointments); 
-  } catch (error: any) {
-    return res.status(500).json({ message:  error.message }); 
-  }
-};
+export const getAppointmentController= async (req:Request, res: Response):Promise<Appointment[]|void>=>{
+  try{
+      const appointments= await getAllAppointmentsService();
+      res.status(200).json(appointments);
+  }catch (error:any) {res.status(404).json({message:error.message}) }
+}
+
 //!-----------------------------TOMAR UN APPOINTMENT ESPECIFICO POR ID------------------------------------------------------
-export const getAppointmentByIdController = async (req: Request,res: Response) => {
+export const getAppointmentByIdController = async (req: Request,res: Response):Promise<Appointment[]|void> => {
   const appointmentId: number = parseInt(req.params.id);
   try {
-    const appointmentEncontrado = await getAppointmentByIdService(appointmentId);
-
-    if (appointmentEncontrado.length !==0) {
-      return res.status(200).json(appointmentEncontrado);
-    }
-    else {
+    const appointment = await getAppointmentByIdService(appointmentId);
+    if (appointment) {
+      res.status(200).json(appointment);
+    } else {
       throw new Error("No se encontró el turno solicitado.");
     }
   } catch (error:any) {
-    res.status(404).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 //!-----------------------------CREAR UN APPOINTMENT-------------------------------------------------------------------------
-export const addAppointmentController = async (req: Request, res: Response) => {//!REVISAR ESTA MAL IMPLEMENTADO
-  const { date, time, userId} = req.body;
-  
-  if (!userId) {
-    return res.status(400).json({ message: "Se requiere el ID del usuario para crear un turno." });
-  }
+export const addAppointmentController = async(req: Request, res: Response): Promise<Appointment|void> => {
   try {
-    const newAppointmentData : AppointmentDto = {
-                date: date,
-                time: time,
-                userId: userId
-            };
-    const newAppointment = await createAppointmentService(newAppointmentData);
-    res.status(201).json(newAppointment);
+      const { date, time, userId } = req.body;
+      if (!userId) {
+          throw Error("Se requiere el ID del usuario para crear un turno.");
+      }
+      if ( typeof date !== "string" || typeof time !== "string" || typeof userId !== "number") {
+          throw Error("Los datos ingresados son incorrectos.");
+      }
+      const newAppointmentData: AppointmentDto = {
+          date: date,
+          time: time,
+          userId: userId
+      };
+      const newAppointment = await createAppointmentService(newAppointmentData);
+      res.status(201).json(newAppointment);
   } catch (error:any) {
-    res.status(500).json({message: `Problema en CREAR el turno. Error en sección de controller :${error.message}`});
+      res.status(400).json({ message: error.message });
   }
 };
 //!-----------------------------CANCELAR UN APPOINTMENT-------------------------------------------------------------------------
-export const cancelAppointmentController = async (req: Request, res: Response) => {
+export const cancelAppointmentController = async (req: Request, res: Response):Promise<void|Error> => {
   const appointmentId: number = parseInt(req.params.id);
   try {
     const cancelledAppointment = await cancelAppointmentService(appointmentId);
@@ -61,6 +58,6 @@ export const cancelAppointmentController = async (req: Request, res: Response) =
       throw new Error("No se encontró el turno solicitado para cancelar.");
     }
   } catch (error:any) {
-    res.status(500).json({ message: error.message });
+    res.status(404).json({ message: error.message });
   }
 };
