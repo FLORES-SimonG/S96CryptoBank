@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Login.module.css";
 import axios from "axios";
+import { validate } from "../../helpers/validateLogin";
 
 const Login = () => {
   const [itemsFromLogin, setItemsFromLogin] = useState({
@@ -9,11 +10,12 @@ const Login = () => {
     password: "",
   });
 
-  console.log(itemsFromLogin);
+
+  const [errors, setErrors] = useState({});
 
   //* Funcion MANEJADORA el cambio de los inputs de LOGIN
   const handlerInputChangeFromLogin = (evento) => {
-    // console.log(evento);
+   
 
     //?OPCION 1:
     const { name, value } = evento.target;
@@ -21,6 +23,15 @@ const Login = () => {
       ...itemsFromLogin,
       [name]: value,
     });
+
+    const newErrors = validate(itemsFromLogin);
+    if (newErrors[name]) {
+      setErrors({ ...errors, [name]: newErrors[name] });
+    } else {
+      const { [name]: value, ...remainingErrors } = errors;
+      setErrors(remainingErrors);
+    } 
+    
 
     //?OPCION 2:
     // const {name,value} = evento.target;
@@ -42,17 +53,33 @@ const Login = () => {
   //* Funcion MANEJADORA para el submit del formulario de LOGIN
   const handleOnSubmitFromLogin = (evento) => {
     evento.preventDefault();
-    alert("Formulario de LOGIN enviado");
+    const newErrors = validate(itemsFromLogin);
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return alert ("Formulario de LOGIN NO FUE ENVIADO");
+    } else{alert("Formulario de LOGIN EXITOSO PA");}
+
+    
+    
   };
+
+
+
+
+
+
+
+
+
 
   return (
     <div>
       <Navbar></Navbar>
       <div className={styles.login}>
-        <div class={styles.formContainer}>
-          <p class={styles.title}>Login</p>
-          <form class={styles.form} onSubmit={handleOnSubmitFromLogin}>
-            <div class={styles.inputGroup}>
+        <div className={styles.formContainer}>
+          <p className={styles.title}>Login</p>
+          <form className={styles.form} onSubmit={handleOnSubmitFromLogin}>
+            <div className={styles.inputGroup}>
               <label>Username</label>
               <input
                 type="text"
@@ -60,9 +87,11 @@ const Login = () => {
                 name="username"
                 placeholder=""
                 onChange={handlerInputChangeFromLogin}
-              ></input>
+              />
+              {errors.username && <p>{errors.username}</p>}
+              
             </div>
-            <div class={styles.inputGroup}>
+            <div className={styles.inputGroup}>
               <label>Password</label>
               <input
                 type="password"
@@ -70,9 +99,11 @@ const Login = () => {
                 value={itemsFromLogin.password}
                 placeholder=""
                 onChange={handlerInputChangeFromLogin}
-              ></input>
+              />
+              {errors.password && <p>{errors.password}</p>}
+              
             </div>
-            <button class={styles.sign}>Sign in</button>
+            <button className={styles.sign}>Sign in</button>
           </form>
         </div>
       </div>

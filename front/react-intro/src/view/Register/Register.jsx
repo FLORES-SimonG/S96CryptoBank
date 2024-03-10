@@ -2,6 +2,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Register.module.css";
 import axios from "axios";
 import { useState } from "react";
+import { validate } from "../../helpers/validateRegister";
 
 const Register = () => {
   const today = new Date().toISOString().split("T")[0];
@@ -13,12 +14,16 @@ const Register = () => {
     username: "",
     password: "",
   });
-  console.log(itemsFromRegister);
+  // console.log(itemsFromRegister);
+  const [errors, setErrors] = useState({});
 
   //* Funcion MANEJADORA en el cambio de los inputs de REGISTER
 
-  //? OPCION 1:
   const handlerInputChangeFromRegister = (evento) => {
+    
+    
+    //? OPCION 1:
+
     const { name, value } = evento.target;
     setItemsFromRegister({
       ...itemsFromRegister,
@@ -63,45 +68,76 @@ const Register = () => {
     //         password: value
     //     })
     // }
+
+    const newErrors = validate(itemsFromRegister);
+    if (newErrors[name]) {
+      setErrors({ ...errors, [name]: newErrors[name] });
+    } else {
+      const { [name]: value, ...remainingErrors } = errors;
+      setErrors(remainingErrors);
+    }
   };
 
   //* Funcion MANEJADORA para el submit del formulario de REGISTER
 
   const handleOnSubmitFromRegister = (evento) => {
     evento.preventDefault();
-    alert("Formulario de REGISTRO enviado");
+    const newErrors = validate(itemsFromRegister);
+    console.log(newErrors);
+    if (Object.keys(newErrors).length !== 0) {
+      var e=setErrors(newErrors);
+      console.log(e);
+      return alert("Formulario de REGISTER NO FUE ENVIADO");
+    } else {
+      alert("Formulario de REGISTER EXITOSO PA");
+      console.log(itemsFromRegister);
+    
+      // axios
+      //   .post("http://localhost:3000/user/register", itemsFromRegister)
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
+    }
   };
 
   return (
     <div>
       <Navbar></Navbar>
       <div className={styles.register}>
-        <div class={styles.formContainer}>
-          <p class={styles.title}>Register</p>
-          <form class={styles.form} onSubmit={handleOnSubmitFromRegister}>
-            <div class={styles.inputGroup}>
-              <label for="name">Name</label>
+        <div className={styles.formContainer}>
+          <p className={styles.title}>Register</p>
+          <form className={styles.form} onSubmit={handleOnSubmitFromRegister}>
+            <div className={styles.inputGroup}>
+              <label >Name</label>
               <input
+              value={itemsFromRegister.name}
                 type="text"
                 name="name"
                 id="name"
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
-              ></input>
+              />
+              {errors.name && <p>{errors.name}</p>}
             </div>
-            <div class={styles.inputGroup}>
-              <label for="email">Email</label>
+            <div className={styles.inputGroup}>
+              <label >Email</label>
               <input
+              value={itemsFromRegister.email}
                 type="text"
                 name="email"
                 id="email"
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
-              ></input>
+              />
+              {errors.email && <p>{errors.email}</p>}
             </div>
-            <div class={styles.inputGroup}>
+            <div className={styles.inputGroup}>
               <label htmlFor="birthdate">Birthdate</label>
               <input
+              value={itemsFromRegister.birthdate}
                 type="date"
                 name="birthdate"
                 id="birthdate"
@@ -109,38 +145,45 @@ const Register = () => {
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
               />
+              {errors.birthdate && <p>{errors.birthdate}</p>}
             </div>
-            <div class={styles.inputGroup}>
-              <label for="nDni">ID-CardNumber</label>
+            <div className={styles.inputGroup}>
+              <label >ID-CardNumber</label>
               <input
-                type="number"
+              value={itemsFromRegister.nDni}
+                type="text" //! OJO ACÁ QUE PUEDO TENER PROBLEMA EN BACK
                 name="nDni"
                 id="nDni"
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
-              ></input>
+              />
+              {errors.nDni && <p>{errors.nDni}</p>}
             </div>
-            <div class={styles.inputGroup}>
-              <label for="username">Username</label>
+            <div className={styles.inputGroup}>
+              <label >Username</label>
               <input
+              value={itemsFromRegister.username}
                 type="text"
                 name="username"
                 id="username"
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
-              ></input>
+              />
+              {errors.username && <p>{errors.username}</p>}
             </div>
-            <div class={styles.inputGroup}>
-              <label for="password">Password</label>
+            <div className={styles.inputGroup}>
+              <label >Password</label>
               <input
+              value={itemsFromRegister.password}
                 type="password"
                 name="password"
                 id="password"
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
-              ></input>
+              />
+              {errors.password && <p>{errors.password}</p>}
             </div>
-            <button class={styles.sign}>Sign in</button>
+            <button className={styles.sign}>Sign in</button>
           </form>
         </div>
       </div>
