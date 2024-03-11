@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Register.module.css";
 import axios from "axios";
 import { useState } from "react";
-import { validate } from "../../helpers/validateRegister";
+import {  validateRegister } from "../../helpers/validateRegister";
 
 const Register = () => {
   const today = new Date().toISOString().split("T")[0];
@@ -14,18 +14,19 @@ const Register = () => {
     username: "",
     password: "",
   });
- 
   const [errors, setErrors] = useState({});
 
   //! Funcion MANEJADORA en el cambio de los inputs de REGISTER
 
   const handlerInputChangeFromRegister = (evento) => {
-    
     const { name, value } = evento.target;
-    setItemsFromRegister({...itemsFromRegister,[name]: value});
-    
-    const itemsActualizadoFromRegister={...itemsFromRegister,[name]: value,}; 
-    const newErrors = validate(itemsActualizadoFromRegister);
+    setItemsFromRegister({ ...itemsFromRegister, [name]: value });
+
+    const itemsActualizadoFromRegister = {
+      ...itemsFromRegister,
+      [name]: value,
+    };
+    const newErrors = validateRegister(itemsActualizadoFromRegister);
     if (newErrors[name]) {
       setErrors({ ...errors, [name]: newErrors[name] });
     } else {
@@ -38,30 +39,31 @@ const Register = () => {
 
   const handleOnSubmitFromRegister = async (evento) => {
     evento.preventDefault();
-    
-    const newErrors = validate(itemsFromRegister);
+
+    const newErrors = validateRegister(itemsFromRegister);
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      return alert('Complete el formulario correctamente para que sea enviado');
+      return alert("Complete el formulario correctamente para que sea enviado");
     }
-  
+
     try {
       // Realizar la petición POST con axios
       console.log("Datos enviados al servidor:", itemsFromRegister);
-      const response = await axios.post("http://localhost:3000/users/register", {
-        name: itemsFromRegister.name,
-        email: itemsFromRegister.email,
-        birthdate: itemsFromRegister.birthdate,
-        nDni: Number(itemsFromRegister.nDni),
-        username: itemsFromRegister.username,
-        password: itemsFromRegister.password,
-      });
-  
-      // Manejar la respuesta según tus necesidades
+      const response = await axios.post(
+        "http://localhost:3000/users/register",
+        {
+          name: itemsFromRegister.name,
+          email: itemsFromRegister.email,
+          birthdate: itemsFromRegister.birthdate,
+          nDni: Number(itemsFromRegister.nDni),
+          username: itemsFromRegister.username,
+          password: itemsFromRegister.password,
+        }
+      );
+
       console.log("Respuesta del servidor:", response.data);
       alert("Formulario de REGISTER EXITOSO PA");
     } catch (error) {
-      // Manejar errores de la petición
       console.error("Error al enviar el formulario de REGISTER:", error);
       alert("Error al enviar el formulario, Usuario o contraseña incorrectos.");
     }
@@ -90,7 +92,6 @@ const Register = () => {
                     : "rgba(0, 225, 0, 0.15)",
                 }}
               />
-             
             </div>
             <div className={styles.inputGroup}>
               <label>Email</label>
@@ -108,7 +109,6 @@ const Register = () => {
                     : "rgba(0, 225, 0, 0.15)",
                 }}
               />
-             
             </div>
             <div className={styles.inputGroup}>
               <label>Birthdate</label>
@@ -127,7 +127,6 @@ const Register = () => {
                     : "rgba(0, 225, 0, 0.15)",
                 }}
               />
-             
             </div>
             <div className={styles.inputGroup}>
               <label>ID-CardNumber</label>
@@ -145,7 +144,6 @@ const Register = () => {
                     : "rgba(0, 225, 0, 0.15)",
                 }}
               />
-             
             </div>
             <div className={styles.inputGroup}>
               <label>Username</label>
@@ -163,7 +161,6 @@ const Register = () => {
                     : "rgba(0, 225, 0, 0.15)",
                 }}
               />
-             
             </div>
             <div className={styles.inputGroup}>
               <label>Password</label>
@@ -181,7 +178,6 @@ const Register = () => {
                     : "rgba(0, 225, 0, 0.15)",
                 }}
               />
-             
             </div>
             <button className={styles.sign}>Sign in</button>
           </form>

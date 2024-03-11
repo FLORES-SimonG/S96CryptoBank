@@ -1,4 +1,4 @@
-export const validate =(input)=>{
+export const validateRegister =(input)=>{
     const errors={};
     const expresionRegularUsuario = /^[a-zA-Z0-9]{3,12}$/;
     const expresionRegularPassword = /^[a-zA-Z0-9]{8,20}$/;

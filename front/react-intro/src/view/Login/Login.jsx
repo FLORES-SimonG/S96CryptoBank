@@ -2,29 +2,30 @@ import { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Login.module.css";
 import axios from "axios";
-import { validate } from "../../helpers/validateLogin";
+import { validateLogin } from "../../helpers/validateLogin";
 
 const Login = () => {
-  
-  const [itemsFromLogin, setItemsFromLogin] = useState({username: "",password: ""});
+  const [itemsFromLogin, setItemsFromLogin] = useState({
+    username: "",
+    password: "",
+  });
   const [errors, setErrors] = useState({});
 
-  
-  const handlerInputChangeFromLogin = (evento) => {//! Funcion MANEJADORA el cambio de los inputs de LOGIN
-    //?OPCION 1:
+  //! Funcion MANEJADORA para el cambio de los inputs del formulario de LOGIN
+  const handlerInputChangeFromLogin = (evento) => {
+    //*OPCION 1:
     const { name, value } = evento.target;
-    setItemsFromLogin({...itemsFromLogin,[name]: value,});
+    setItemsFromLogin({ ...itemsFromLogin, [name]: value });
 
     const itemsActualizadoFromLogin = { ...itemsFromLogin, [name]: value };
-    const newErrors = validate(itemsActualizadoFromLogin);
+    const newErrors = validateLogin(itemsActualizadoFromLogin);
 
-    // const newErrors = validate(itemsFromLogin);
-    if (newErrors[name]) {setErrors({ ...errors, [name]: newErrors[name] });
+    if (newErrors[name]) {
+      setErrors({ ...errors, [name]: newErrors[name] });
     } else {
       const { [name]: value, ...remainingErrors } = errors;
       setErrors(remainingErrors);
     }
-
     //?OPCION 2:
     // const {name,value} = evento.target;
     // if (name === 'username') {
@@ -32,52 +33,33 @@ const Login = () => {
     //         ...itemsFromLogin,
     //         username: value
     //     })
-    // }
-
-    // if (name === 'password') {
-    //     setItemsFromLogin({
-    //         ...itemsFromLogin,
-    //         password: value
-    //     })
-    // }
+    // } y así sucesivamente con password y lo que tenga el formulario.
   };
 
-  //* Funcion MANEJADORA para el submit del formulario de LOGIN
+  //! Funcion MANEJADORA para el submit del formulario de LOGIN
   const handleOnSubmitFromLogin = async (evento) => {
     evento.preventDefault();
-  
-    const newErrors = validate(itemsFromLogin);
+
+    const newErrors = validateLogin(itemsFromLogin);
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      return alert('Complete el formulario correctamente para que sea enviado');
+      console.log("Errores en el formulario:", newErrors);
+      return alert("Complete el formulario correctamente para que sea enviado");
     }
-  
+
     try {
-      // Realizar la petición POST con axios
       const response = await axios.post("http://localhost:3000/users/login", {
         username: itemsFromLogin.username,
         password: itemsFromLogin.password,
       });
-  
-      // Manejar la respuesta según tus necesidades
+
       console.log("Respuesta del servidor:", response.data);
       alert("Formulario de LOGIN EXITOSO PA");
     } catch (error) {
-      // Manejar errores de la petición
       console.error("Error al enviar el formulario de LOGIN:", error);
       alert("Error al enviar el formulario, Usuario o contraseña incorrectos.");
     }
   };
-  // const handleOnSubmitFromLogin = (evento) => {
-  //   evento.preventDefault();
-  //   const newErrors = validate(itemsFromLogin);
-  //   if (Object.keys(newErrors).length > 0) {
-  //     setErrors(newErrors);
-  //     return alert("Formulario de LOGIN NO FUE ENVIADO");
-  //   } else {
-  //     alert("Formulario de LOGIN EXITOSO PA");
-  //   }
-  // };
 
   return (
     <div>
@@ -96,9 +78,10 @@ const Login = () => {
                 onChange={handlerInputChangeFromLogin}
                 style={{
                   transition: "2s",
-                  backgroundColor: errors.username===true 
-                    ? "rgba(255, 0, 0, 0.15)"
-                    : "rgba(0, 225, 0, 0.15)",
+                  backgroundColor:
+                    errors.username === true
+                      ? "rgba(255, 0, 0, 0.15)"
+                      : "rgba(0, 225, 0, 0.15)",
                 }}
               />
             </div>
@@ -112,9 +95,10 @@ const Login = () => {
                 onChange={handlerInputChangeFromLogin}
                 style={{
                   transition: "2s",
-                  backgroundColor: errors.password===true
-                    ? "rgba(255, 0, 0, 0.15)"
-                    : "rgba(0, 225, 0, 0.15)",
+                  backgroundColor:
+                    errors.password === true
+                      ? "rgba(255, 0, 0, 0.15)"
+                      : "rgba(0, 225, 0, 0.15)",
                 }}
               />
             </div>
