@@ -79,15 +79,17 @@ const Register = () => {
   //* Funcion MANEJADORA para el submit del formulario de REGISTER
 
   const handleOnSubmitFromRegister = (evento) => {
+    
+    
     evento.preventDefault();
     const newErrors = validate(itemsFromRegister);
-    console.log(newErrors);
+    // console.log(newErrors);
 
-    if (Object.keys(newErrors).length !== 0) {
-      return alert("Formulario de REGISTER NO FUE ENVIADO");
+    if (Object.keys(newErrors).length > 0) {
+      return alert("El Formulario NO FUE ENVIADO");
     } else {
-      alert("Formulario de REGISTER EXITOSO PA");
-      console.log(itemsFromRegister);
+      alert("Formulario EXITOSO PA");
+      // console.log(itemsFromRegister);
 
       // axios
       //   .post("http://localhost:3000/user/register", itemsFromRegister)

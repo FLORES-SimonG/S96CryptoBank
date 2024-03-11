@@ -5,25 +5,18 @@ import axios from "axios";
 import { validate } from "../../helpers/validateLogin";
 
 const Login = () => {
-  const [itemsFromLogin, setItemsFromLogin] = useState({
-    username: "",
-    password: "",
-  });
-
+  
+  const [itemsFromLogin, setItemsFromLogin] = useState({username: "",password: ""});
   const [errors, setErrors] = useState({});
 
-  //* Funcion MANEJADORA el cambio de los inputs de LOGIN
-  const handlerInputChangeFromLogin = (evento) => {
+  
+  const handlerInputChangeFromLogin = (evento) => {//! Funcion MANEJADORA el cambio de los inputs de LOGIN
     //?OPCION 1:
     const { name, value } = evento.target;
-    setItemsFromLogin({
-      ...itemsFromLogin,
-      [name]: value,
-    });
+    setItemsFromLogin({...itemsFromLogin,[name]: value,});
 
     const newErrors = validate(itemsFromLogin);
-    if (newErrors[name]) {
-      setErrors({ ...errors, [name]: newErrors[name] });
+    if (newErrors[name]) {setErrors({ ...errors, [name]: newErrors[name] });
     } else {
       const { [name]: value, ...remainingErrors } = errors;
       setErrors(remainingErrors);
@@ -47,16 +40,41 @@ const Login = () => {
   };
 
   //* Funcion MANEJADORA para el submit del formulario de LOGIN
-  const handleOnSubmitFromLogin = (evento) => {
+  const handleOnSubmitFromLogin = async (evento) => {
     evento.preventDefault();
-    const newErrors = validate(itemsFromLogin);
+  
+    const newErrors = validate(itemsFromLogin);//! Validar los datos del formulario con Expresiones Regulares
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return alert("Formulario de LOGIN NO FUE ENVIADO");
-    } else {
+    }
+  
+    try {
+      // Realizar la petición POST con axios
+      const response = await axios.post("http://localhost:3000/users/login", {
+        username: itemsFromLogin.username,
+        password: itemsFromLogin.password,
+      });
+  
+      // Manejar la respuesta según tus necesidades
+      console.log("Respuesta del servidor:", response.data);
       alert("Formulario de LOGIN EXITOSO PA");
+    } catch (error) {
+      // Manejar errores de la petición
+      console.error("Error al enviar el formulario de LOGIN:", error);
+      alert("Error al enviar el formulario, Usuario o contraseña incorrectos.");
     }
   };
+  // const handleOnSubmitFromLogin = (evento) => {
+  //   evento.preventDefault();
+  //   const newErrors = validate(itemsFromLogin);
+  //   if (Object.keys(newErrors).length > 0) {
+  //     setErrors(newErrors);
+  //     return alert("Formulario de LOGIN NO FUE ENVIADO");
+  //   } else {
+  //     alert("Formulario de LOGIN EXITOSO PA");
+  //   }
+  // };
 
   return (
     <div>
