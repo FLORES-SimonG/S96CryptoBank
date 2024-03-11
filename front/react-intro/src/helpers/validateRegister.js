@@ -8,24 +8,24 @@ export const validate =(input)=>{
     const expresionRegularDate = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 
 
-    if (!expresionRegularUsuario.test(input.username)) {
-        return errors.username = 'El usuario es incorrecto';
-    }
-    
-    if (!expresionRegularPassword.test(input.password)) {
-       return  errors.password = 'La contraseña es incorrecta';
+    if (!expresionRegularNombre.test(input.name)) {
+         errors.name = 'El nombre es incorrecto';
     }
     if (!expresionRegularCorreo.test(input.email)) {
-        return errors.email = 'El email es incorrecto';
-    }
-    if (!expresionRegularNombre.test(input.name)) {
-        return errors.name = 'El nombre es incorrecto';
-    }
-    if (input.nDni !== undefined && !expresionRegularDNI.test(input.nDni.toString())) {
-        return errors.nDni = 'El DNI es incorrecto';
+         errors.email = 'El email es incorrecto';
     }
     if (!expresionRegularDate.test(input.birthdate)) {
-        return errors.birthdate = 'La fecha es incorrecta';
+         errors.birthdate = 'La fecha es incorrecta';
     }
+    if (input.nDni !== undefined && !expresionRegularDNI.test(input.nDni.toString())) {
+         errors.nDni = 'El DNI es incorrecto';
+    }
+    if (!expresionRegularUsuario.test(input.username)) {
+         errors.username = 'El usuario es incorrecto';
+    }
+    if (!expresionRegularPassword.test(input.password)) {
+         errors.password = 'La contraseña es incorrecta';
+    }
+    
     return errors;
 }

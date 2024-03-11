@@ -29,14 +29,15 @@ export const createUserService = async(
   const QueryRunner= AppDataSource.createQueryRunner();
   await QueryRunner.connect();
 
-  try
-  {
+  try{
       await QueryRunner.startTransaction();
 
   const validateMail= await UserRepository.findOneBy({email: createUserDto.email})
   if(validateMail) throw Error("ya existe un usuario con ese email")
+
   const validateNDni=await UserRepository.findOneBy({nDni: createUserDto.nDni})
   if(validateNDni) throw Error("ya existe un usuario con ese DNI")
+
   const validateUsername=await CredentialsRepository.findOneBy({username: createUserDto.username})
   if(validateUsername) throw Error("ya existe un usuario con ese username")
 

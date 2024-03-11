@@ -40,7 +40,7 @@ export const createUserController = async (req: Request, res: Response) => {
       const newUser = await createUserService({ name, email, birthdate, nDni, username, password });
       return res.status(201).json(newUser);
     } else {
-      return res.status(400).json({ message: 'Tipos de datos inválidos en la solicitud. Debe estar correctamente completado' });
+      throw new Error('Tipos de datos inválidos en la solicitud. Debe estar correctamente completado'); //!return res.status(400).json({ message: 'Tipos de datos inválidos en la solicitud. Debe estar correctamente completado' });
     }
   } catch (error) {
     return res.status(400).json({ message: `Error en crear el usuario: ${error}` });

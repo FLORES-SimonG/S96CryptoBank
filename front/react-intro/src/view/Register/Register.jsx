@@ -84,9 +84,9 @@ const Register = () => {
     evento.preventDefault();
     const newErrors = validate(itemsFromRegister);
     console.log(newErrors);
+    
     if (Object.keys(newErrors).length !== 0) {
-      var e=setErrors(newErrors);
-      console.log(e);
+     
       return alert("Formulario de REGISTER NO FUE ENVIADO");
     } else {
       alert("Formulario de REGISTER EXITOSO PA");
@@ -119,6 +119,7 @@ const Register = () => {
                 id="name"
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
+                style={{backgroundColor: errors.name ? 'rgba(255, 0, 0, 0.15)' : 'rgba(0, 225, 0, 0.15)'}}
               />
               {errors.name && <p>{errors.name}</p>}
             </div>
@@ -131,6 +132,7 @@ const Register = () => {
                 id="email"
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
+                style={{backgroundColor: errors.email ? 'rgba(255, 0, 0, 0.15)' : 'rgba(0, 225, 0, 0.15)'}}
               />
               {errors.email && <p>{errors.email}</p>}
             </div>
@@ -144,6 +146,7 @@ const Register = () => {
                 max={today}
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
+                style={{backgroundColor: errors.birthdate ? 'rgba(255, 0, 0, 0.15)' : 'rgba(0, 225, 0, 0.15)'}}
               />
               {errors.birthdate && <p>{errors.birthdate}</p>}
             </div>
@@ -156,6 +159,7 @@ const Register = () => {
                 id="nDni"
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
+                style={{backgroundColor: errors.nDni ? 'rgba(255, 0, 0, 0.15)' : 'rgba(0, 225, 0, 0.15)'}}
               />
               {errors.nDni && <p>{errors.nDni}</p>}
             </div>
@@ -168,6 +172,7 @@ const Register = () => {
                 id="username"
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
+                style={{backgroundColor: errors.username ? 'rgba(255, 0, 0, 0.15)' : 'rgba(0, 225, 0, 0.15)'}}
               />
               {errors.username && <p>{errors.username}</p>}
             </div>
@@ -180,6 +185,7 @@ const Register = () => {
                 id="password"
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
+                style={{backgroundColor: errors.password ? 'rgba(255, 0, 0, 0.15)' : 'rgba(0, 225, 0, 0.15)'}}
               />
               {errors.password && <p>{errors.password}</p>}
             </div>
