@@ -25,7 +25,7 @@ export const getUserByIdService= async (id:number): Promise< User| Error>=>{
 export const createUserService = async(
   createUserDto: UserDto
 ): Promise<User|Error> =>{
-
+//!transacciones
   const QueryRunner= AppDataSource.createQueryRunner();
   await QueryRunner.connect();
 

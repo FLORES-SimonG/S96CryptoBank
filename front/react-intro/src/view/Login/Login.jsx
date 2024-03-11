@@ -15,7 +15,10 @@ const Login = () => {
     const { name, value } = evento.target;
     setItemsFromLogin({...itemsFromLogin,[name]: value,});
 
-    const newErrors = validate(itemsFromLogin);
+    const updatedItems = { ...itemsFromLogin, [name]: value };
+    const newErrors = validate(updatedItems);
+
+    // const newErrors = validate(itemsFromLogin);
     if (newErrors[name]) {setErrors({ ...errors, [name]: newErrors[name] });
     } else {
       const { [name]: value, ...remainingErrors } = errors;
@@ -97,7 +100,7 @@ const Login = () => {
                     ? "rgba(255, 0, 0, 0.15)"
                     : "rgba(0, 225, 0, 0.15)",
                 }}
-              />
+              />{console.log(errors.username)}
             </div>
             <div className={styles.inputGroup}>
               <label>Password</label>
@@ -113,7 +116,7 @@ const Login = () => {
                     ? "rgba(255, 0, 0, 0.15)"
                     : "rgba(0, 225, 0, 0.15)",
                 }}
-              />
+              />{console.log(errors.password)}
             </div>
             <button className={styles.sign}>Sign in</button>
           </form>
