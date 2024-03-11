@@ -14,60 +14,18 @@ const Register = () => {
     username: "",
     password: "",
   });
-  // console.log(itemsFromRegister);
+ 
   const [errors, setErrors] = useState({});
 
-  //* Funcion MANEJADORA en el cambio de los inputs de REGISTER
+  //! Funcion MANEJADORA en el cambio de los inputs de REGISTER
 
   const handlerInputChangeFromRegister = (evento) => {
-    //? OPCION 1:
-
+    
     const { name, value } = evento.target;
-    setItemsFromRegister({
-      ...itemsFromRegister,
-      [name]: value,
-    });
-
-    //? OPCION 2:
-    //const {name,value} = evento.target;
-    // if (name === 'name') {
-    //     setItemsFromRegister({
-    //         ...itemsFromRegister,
-    //         name: value
-    //     })
-    // }
-    // if (name === 'email') {
-    //     setItemsFromRegister({
-    //         ...itemsFromRegister,
-    //         email: value
-    //     })
-    // }
-    // if (name === 'birthdate') {
-    //     setItemsFromRegister({
-    //         ...itemsFromRegister,
-    //         birthdate: value
-    //     })
-    // }
-    // if (name === 'nDni') {
-    //     setItemsFromRegister({
-    //         ...itemsFromRegister,
-    //         nDni: value
-    //     })
-    // }
-    // if (name === 'username') {
-    //     setItemsFromRegister({
-    //         ...itemsFromRegister,
-    //         username: value
-    //     })
-    // }
-    // if (name === 'password') {
-    //     setItemsFromRegister({
-    //         ...itemsFromRegister,
-    //         password: value
-    //     })
-    // }
-
-    const newErrors = validate(itemsFromRegister);
+    setItemsFromRegister({...itemsFromRegister,[name]: value});
+    
+    const itemsActualizadoFromRegister={...itemsFromRegister,[name]: value,}; 
+    const newErrors = validate(itemsActualizadoFromRegister);
     if (newErrors[name]) {
       setErrors({ ...errors, [name]: newErrors[name] });
     } else {
@@ -78,27 +36,34 @@ const Register = () => {
 
   //* Funcion MANEJADORA para el submit del formulario de REGISTER
 
-  const handleOnSubmitFromRegister = (evento) => {
-    
-    
+  const handleOnSubmitFromRegister = async (evento) => {
     evento.preventDefault();
+    
     const newErrors = validate(itemsFromRegister);
-    // console.log(newErrors);
-
     if (Object.keys(newErrors).length > 0) {
-      return alert("El Formulario NO FUE ENVIADO");
-    } else {
-      alert("Formulario EXITOSO PA");
-      // console.log(itemsFromRegister);
-
-      // axios
-      //   .post("http://localhost:3000/user/register", itemsFromRegister)
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
+      setErrors(newErrors);
+      return alert('Complete el formulario correctamente para que sea enviado');
+    }
+  
+    try {
+      // Realizar la petición POST con axios
+      console.log("Datos enviados al servidor:", itemsFromRegister);
+      const response = await axios.post("http://localhost:3000/users/register", {
+        name: itemsFromRegister.name,
+        email: itemsFromRegister.email,
+        birthdate: itemsFromRegister.birthdate,
+        nDni: Number(itemsFromRegister.nDni),
+        username: itemsFromRegister.username,
+        password: itemsFromRegister.password,
+      });
+  
+      // Manejar la respuesta según tus necesidades
+      console.log("Respuesta del servidor:", response.data);
+      alert("Formulario de REGISTER EXITOSO PA");
+    } catch (error) {
+      // Manejar errores de la petición
+      console.error("Error al enviar el formulario de REGISTER:", error);
+      alert("Error al enviar el formulario, Usuario o contraseña incorrectos.");
     }
   };
 
@@ -125,7 +90,7 @@ const Register = () => {
                     : "rgba(0, 225, 0, 0.15)",
                 }}
               />
-              {errors.name && <p>{errors.name}</p>}
+             
             </div>
             <div className={styles.inputGroup}>
               <label>Email</label>
@@ -143,10 +108,10 @@ const Register = () => {
                     : "rgba(0, 225, 0, 0.15)",
                 }}
               />
-              {errors.email && <p>{errors.email}</p>}
+             
             </div>
             <div className={styles.inputGroup}>
-              <label htmlFor="birthdate">Birthdate</label>
+              <label>Birthdate</label>
               <input
                 value={itemsFromRegister.birthdate}
                 type="date"
@@ -162,13 +127,13 @@ const Register = () => {
                     : "rgba(0, 225, 0, 0.15)",
                 }}
               />
-              {errors.birthdate && <p>{errors.birthdate}</p>}
+             
             </div>
             <div className={styles.inputGroup}>
               <label>ID-CardNumber</label>
               <input
                 value={itemsFromRegister.nDni}
-                type="text" //! OJO ACÁ QUE PUEDO TENER PROBLEMA EN BACK
+                type="number" //! OJO ACÁ QUE PUEDO TENER PROBLEMA EN BACK
                 name="nDni"
                 id="nDni"
                 placeholder=""
@@ -180,7 +145,7 @@ const Register = () => {
                     : "rgba(0, 225, 0, 0.15)",
                 }}
               />
-              {errors.nDni && <p>{errors.nDni}</p>}
+             
             </div>
             <div className={styles.inputGroup}>
               <label>Username</label>
@@ -198,7 +163,7 @@ const Register = () => {
                     : "rgba(0, 225, 0, 0.15)",
                 }}
               />
-              {errors.username && <p>{errors.username}</p>}
+             
             </div>
             <div className={styles.inputGroup}>
               <label>Password</label>
@@ -216,7 +181,7 @@ const Register = () => {
                     : "rgba(0, 225, 0, 0.15)",
                 }}
               />
-              {errors.password && <p>{errors.password}</p>}
+             
             </div>
             <button className={styles.sign}>Sign in</button>
           </form>

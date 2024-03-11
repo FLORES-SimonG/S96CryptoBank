@@ -3,11 +3,11 @@ export const validate =(input)=>{
     const expresionRegularUsuario = /^[a-zA-Z0-9]{3,20}$/;
     const expresionRegularPassword = /^[a-zA-Z0-9]{5,20}$/;
     if (!expresionRegularUsuario.test(input.username)) {
-        errors.username = 'El usuario es incorrecto';
+        errors.username = true;
     }
     
     if (!expresionRegularPassword.test(input.password)) {
-        errors.password = 'La contraseña es incorrecta';
+        errors.password = true;
     }
     
     return errors;

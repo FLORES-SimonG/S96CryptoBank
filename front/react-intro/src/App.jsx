@@ -12,8 +12,8 @@ function App() {
     {/* <Navbar></Navbar> */}
     {/* <Home></Home> */}
     {/* <MyAppointments></MyAppointments> */}
-    {/* <Register></Register> */}
-    <Login></Login>
+    <Register></Register>
+    {/* <Login></Login> */}
 
     </>
   )

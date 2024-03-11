@@ -15,8 +15,8 @@ const Login = () => {
     const { name, value } = evento.target;
     setItemsFromLogin({...itemsFromLogin,[name]: value,});
 
-    const updatedItems = { ...itemsFromLogin, [name]: value };
-    const newErrors = validate(updatedItems);
+    const itemsActualizadoFromLogin = { ...itemsFromLogin, [name]: value };
+    const newErrors = validate(itemsActualizadoFromLogin);
 
     // const newErrors = validate(itemsFromLogin);
     if (newErrors[name]) {setErrors({ ...errors, [name]: newErrors[name] });
@@ -46,10 +46,10 @@ const Login = () => {
   const handleOnSubmitFromLogin = async (evento) => {
     evento.preventDefault();
   
-    const newErrors = validate(itemsFromLogin);//! Validar los datos del formulario con Expresiones Regulares
+    const newErrors = validate(itemsFromLogin);
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      return alert("Formulario de LOGIN NO FUE ENVIADO");
+      return alert('Complete el formulario correctamente para que sea enviado');
     }
   
     try {
@@ -96,11 +96,11 @@ const Login = () => {
                 onChange={handlerInputChangeFromLogin}
                 style={{
                   transition: "2s",
-                  backgroundColor: errors.username
+                  backgroundColor: errors.username===true 
                     ? "rgba(255, 0, 0, 0.15)"
                     : "rgba(0, 225, 0, 0.15)",
                 }}
-              />{console.log(errors.username)}
+              />
             </div>
             <div className={styles.inputGroup}>
               <label>Password</label>
@@ -112,11 +112,11 @@ const Login = () => {
                 onChange={handlerInputChangeFromLogin}
                 style={{
                   transition: "2s",
-                  backgroundColor: errors.password
+                  backgroundColor: errors.password===true
                     ? "rgba(255, 0, 0, 0.15)"
                     : "rgba(0, 225, 0, 0.15)",
                 }}
-              />{console.log(errors.password)}
+              />
             </div>
             <button className={styles.sign}>Sign in</button>
           </form>
