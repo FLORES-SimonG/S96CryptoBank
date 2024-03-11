@@ -20,8 +20,6 @@ const Register = () => {
   //* Funcion MANEJADORA en el cambio de los inputs de REGISTER
 
   const handlerInputChangeFromRegister = (evento) => {
-    
-    
     //? OPCION 1:
 
     const { name, value } = evento.target;
@@ -84,14 +82,13 @@ const Register = () => {
     evento.preventDefault();
     const newErrors = validate(itemsFromRegister);
     console.log(newErrors);
-    
+
     if (Object.keys(newErrors).length !== 0) {
-     
       return alert("Formulario de REGISTER NO FUE ENVIADO");
     } else {
       alert("Formulario de REGISTER EXITOSO PA");
       console.log(itemsFromRegister);
-    
+
       // axios
       //   .post("http://localhost:3000/user/register", itemsFromRegister)
       //   .then((response) => {
@@ -111,81 +108,111 @@ const Register = () => {
           <p className={styles.title}>Register</p>
           <form className={styles.form} onSubmit={handleOnSubmitFromRegister}>
             <div className={styles.inputGroup}>
-              <label >Name</label>
+              <label>Name</label>
               <input
-              value={itemsFromRegister.name}
+                value={itemsFromRegister.name}
                 type="text"
                 name="name"
                 id="name"
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
-                style={{backgroundColor: errors.name ? 'rgba(255, 0, 0, 0.15)' : 'rgba(0, 225, 0, 0.15)'}}
+                style={{
+                  transition: "2s",
+                  backgroundColor: errors.name
+                    ? "rgba(255, 0, 0, 0.15)"
+                    : "rgba(0, 225, 0, 0.15)",
+                }}
               />
               {errors.name && <p>{errors.name}</p>}
             </div>
             <div className={styles.inputGroup}>
-              <label >Email</label>
+              <label>Email</label>
               <input
-              value={itemsFromRegister.email}
+                value={itemsFromRegister.email}
                 type="text"
                 name="email"
                 id="email"
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
-                style={{backgroundColor: errors.email ? 'rgba(255, 0, 0, 0.15)' : 'rgba(0, 225, 0, 0.15)'}}
+                style={{
+                  transition: "2s",
+                  backgroundColor: errors.email
+                    ? "rgba(255, 0, 0, 0.15)"
+                    : "rgba(0, 225, 0, 0.15)",
+                }}
               />
               {errors.email && <p>{errors.email}</p>}
             </div>
             <div className={styles.inputGroup}>
               <label htmlFor="birthdate">Birthdate</label>
               <input
-              value={itemsFromRegister.birthdate}
+                value={itemsFromRegister.birthdate}
                 type="date"
                 name="birthdate"
                 id="birthdate"
                 max={today}
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
-                style={{backgroundColor: errors.birthdate ? 'rgba(255, 0, 0, 0.15)' : 'rgba(0, 225, 0, 0.15)'}}
+                style={{
+                  transition: "2s",
+                  backgroundColor: errors.birthdate
+                    ? "rgba(255, 0, 0, 0.15)"
+                    : "rgba(0, 225, 0, 0.15)",
+                }}
               />
               {errors.birthdate && <p>{errors.birthdate}</p>}
             </div>
             <div className={styles.inputGroup}>
-              <label >ID-CardNumber</label>
+              <label>ID-CardNumber</label>
               <input
-              value={itemsFromRegister.nDni}
+                value={itemsFromRegister.nDni}
                 type="text" //! OJO ACÁ QUE PUEDO TENER PROBLEMA EN BACK
                 name="nDni"
                 id="nDni"
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
-                style={{backgroundColor: errors.nDni ? 'rgba(255, 0, 0, 0.15)' : 'rgba(0, 225, 0, 0.15)'}}
+                style={{
+                  transition: "2s",
+                  backgroundColor: errors.nDni
+                    ? "rgba(255, 0, 0, 0.15)"
+                    : "rgba(0, 225, 0, 0.15)",
+                }}
               />
               {errors.nDni && <p>{errors.nDni}</p>}
             </div>
             <div className={styles.inputGroup}>
-              <label >Username</label>
+              <label>Username</label>
               <input
-              value={itemsFromRegister.username}
+                value={itemsFromRegister.username}
                 type="text"
                 name="username"
                 id="username"
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
-                style={{backgroundColor: errors.username ? 'rgba(255, 0, 0, 0.15)' : 'rgba(0, 225, 0, 0.15)'}}
+                style={{
+                  transition: "2s",
+                  backgroundColor: errors.username
+                    ? "rgba(255, 0, 0, 0.15)"
+                    : "rgba(0, 225, 0, 0.15)",
+                }}
               />
               {errors.username && <p>{errors.username}</p>}
             </div>
             <div className={styles.inputGroup}>
-              <label >Password</label>
+              <label>Password</label>
               <input
-              value={itemsFromRegister.password}
+                value={itemsFromRegister.password}
                 type="password"
                 name="password"
                 id="password"
                 placeholder=""
                 onChange={handlerInputChangeFromRegister}
-                style={{backgroundColor: errors.password ? 'rgba(255, 0, 0, 0.15)' : 'rgba(0, 225, 0, 0.15)'}}
+                style={{
+                  transition: "2s",
+                  backgroundColor: errors.password
+                    ? "rgba(255, 0, 0, 0.15)"
+                    : "rgba(0, 225, 0, 0.15)",
+                }}
               />
               {errors.password && <p>{errors.password}</p>}
             </div>

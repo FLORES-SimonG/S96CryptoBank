@@ -10,13 +10,10 @@ const Login = () => {
     password: "",
   });
 
-
   const [errors, setErrors] = useState({});
 
   //* Funcion MANEJADORA el cambio de los inputs de LOGIN
   const handlerInputChangeFromLogin = (evento) => {
-   
-
     //?OPCION 1:
     const { name, value } = evento.target;
     setItemsFromLogin({
@@ -30,8 +27,7 @@ const Login = () => {
     } else {
       const { [name]: value, ...remainingErrors } = errors;
       setErrors(remainingErrors);
-    } 
-    
+    }
 
     //?OPCION 2:
     // const {name,value} = evento.target;
@@ -56,21 +52,11 @@ const Login = () => {
     const newErrors = validate(itemsFromLogin);
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      return alert ("Formulario de LOGIN NO FUE ENVIADO");
-    } else{alert("Formulario de LOGIN EXITOSO PA");}
-
-    
-    
+      return alert("Formulario de LOGIN NO FUE ENVIADO");
+    } else {
+      alert("Formulario de LOGIN EXITOSO PA");
+    }
   };
-
-
-
-
-
-
-
-
-
 
   return (
     <div>
@@ -87,9 +73,13 @@ const Login = () => {
                 name="username"
                 placeholder=""
                 onChange={handlerInputChangeFromLogin}
+                style={{
+                  transition: "2s",
+                  backgroundColor: errors.username
+                    ? "rgba(255, 0, 0, 0.15)"
+                    : "rgba(0, 225, 0, 0.15)",
+                }}
               />
-              {errors.username && <p>{errors.username}</p>}
-              
             </div>
             <div className={styles.inputGroup}>
               <label>Password</label>
@@ -99,9 +89,13 @@ const Login = () => {
                 value={itemsFromLogin.password}
                 placeholder=""
                 onChange={handlerInputChangeFromLogin}
+                style={{
+                  transition: "2s",
+                  backgroundColor: errors.password
+                    ? "rgba(255, 0, 0, 0.15)"
+                    : "rgba(0, 225, 0, 0.15)",
+                }}
               />
-              {errors.password && <p>{errors.password}</p>}
-              
             </div>
             <button className={styles.sign}>Sign in</button>
           </form>
