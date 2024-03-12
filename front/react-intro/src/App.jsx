@@ -4,17 +4,23 @@ import MyAppointments from "./components/MyAppointments/MyAppointments.jsx"
 import Login from './view/Login/Login.jsx';
 import Register from './view/Register/Register.jsx';
 import Navbar from './components/Navbar/Navbar.jsx';
+import {Routes, Route} from 'react-router-dom';
+import Welcome from './view/welcome/Welcome.jsx';
 
 
 function App() {
   return (
     <>
-    {/* <Navbar></Navbar> */}
-    {/* <Home></Home> */}
-    {/* <MyAppointments></MyAppointments> */}
-    {/* <Register></Register> */}
-    <Login></Login>
-
+    <Routes>
+   
+    <Route path="/" element={<Welcome/>}/>
+    <Route path="/home" element={<Home/>}/>
+    <Route path="/myappointments" element={<MyAppointments/>}/>
+    <Route path="/register" element={<Register/>}/>
+    <Route path="/login" element={<Login/>}/>
+    
+  
+  </Routes>
     </>
   )
 }
