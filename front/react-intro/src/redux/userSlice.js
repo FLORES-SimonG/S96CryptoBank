@@ -13,17 +13,17 @@ export const userSlice = createSlice({
     reducers: { //propio de toolkit
         //! Actions:
         //! 1. setUserData
-        setUserData:(state,action)=>{ //* state = actualUser
+        setUser:(state,action)=>{ //* state = actualUser
             //aqui va la logica de la accion, te voy a dar las instrucciones
             //* me va a llegar un objeto
             //*Action: {type: setUserData, payload: {name: "Juan", email: " }
             state.userData = action.payload;
         },
         //! 2. setUserAppointments:
-        setUserAppointments:(state,action)=>{//! por convencion se usa action y state
+        setAppointments:(state,action)=>{//! por convencion se usa action y state
             state.userAppointments = action.payload;
         }
     }
 });
-export const {setUserData, setUserAppointments} = userSlice.actions;
+export const {setUser, setAppointments} = userSlice.actions;
 export default userSlice.reducer; //exporto el reducer para poder usarlo en el store.js

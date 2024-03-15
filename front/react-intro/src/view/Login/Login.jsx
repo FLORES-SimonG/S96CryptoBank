@@ -3,13 +3,20 @@ import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Login.module.css";
 import axios from "axios";
 import { validateLogin } from "../../helpers/validateLogin";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [itemsFromLogin, setItemsFromLogin] = useState({
     username: "",
     password: "",
   });
   const [errors, setErrors] = useState({});
+
 
   //! Funcion MANEJADORA para el cambio de los inputs del formulario de LOGIN
   const handlerInputChangeFromLogin = (evento) => {
@@ -54,7 +61,9 @@ const Login = () => {
       });
 
       console.log("Respuesta del servidor:", response.data);
+      dispatch(setUser(response.data));
       alert("Formulario de LOGIN EXITOSO PA");
+      navigate("/home");
     } catch (error) {
       console.error("Error al enviar el formulario de LOGIN:", error);
       alert("Error al enviar el formulario, Usuario o contraseña incorrectos.");
