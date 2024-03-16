@@ -5,7 +5,7 @@ import handleAppointmentCancel from './MyAppointments.jsx';
 const CardAppointments = ({ turno: { date, time, user, status } , handleAppointmentCancel,id}) => {
 
 const handleCancel = ()=>{
-  window.confirm("Are you sure you want to cancel this appointment?")?(handleAppointmentCancel(id), console.log("Cancelación cancelada")
+  window.confirm("Are you sure you want to cancel this appointment?")?(handleAppointmentCancel(id), console.log("Cancelación cancelada", alert("Appointment canceled"))
   ):(console.log("NO SE HA CANCELADO"));}
 
 
