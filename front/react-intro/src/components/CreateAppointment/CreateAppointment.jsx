@@ -1,7 +1,9 @@
 import { useState } from "react";
-
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import styles from "../../view/Register/Register.module.css";
 import axios from "axios";
+import { setAppointments } from "../../redux/userSlice.js";
 
 import { useSelector } from "react-redux";
 
@@ -13,6 +15,7 @@ import {
 
 const CreateAppointment = () => {
   const userId = useSelector((state) => state.actualUser.userData.user.id);
+  const dispatch = useDispatch();
 
   const [itemsFromCreateAppointment, setItemsFromCreateAppointment] = useState({
     time: "",
@@ -59,9 +62,19 @@ const CreateAppointment = () => {
         alert(
           `Ha sido creada la nueva reserva: fecha: ${appointmentInDB.date}, hora: ${appointmentInDB.time}`
         );
+        axios
+        .get(`http://localhost:3000/users/${userId}`)
+        .then((res) => {dispatch(setAppointments(res.data.appointments))})
       })
       .catch((error) => alert("ocurrio un error: " + error.message));
   };
+
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/users/${userId}`)
+      .then((res) => dispatch(setAppointments(res.data.appointments)));
+  }, []);
 
   return (
     <div>
@@ -107,7 +120,7 @@ const CreateAppointment = () => {
               />
             </div>
 
-            <button className={styles.sign}>Sign in</button>
+            <button className={styles.sign}>Reserve</button>
           </form>
         </div>
       </div>

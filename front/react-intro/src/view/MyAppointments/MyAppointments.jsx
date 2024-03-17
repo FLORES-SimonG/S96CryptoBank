@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import CardAppointments from "./CardAppointments.jsx";
+import CardAppointments from "../../components/CardAppointments/CardAppointments.jsx";
 import styles from "./MyAppointmentsStyles.module.css";
 import axios from "axios";
-import Navbar from "../Navbar/Navbar.jsx";
+import Navbar from "../../components/Navbar/Navbar.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { setAppointments } from "../../redux/userSlice.js";
-import CreateAppointment from "../CreateAppointment/CreateAppointment.jsx";
+import CreateAppointment from "../../components/CreateAppointment/CreateAppointment.jsx";
 
 const MyAppointments = () => {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const MyAppointments = () => {
               )
             )
           );
-      });
+      }).catch((error) => console.log(error.message));
   };
 
   const activeUserID = useSelector(

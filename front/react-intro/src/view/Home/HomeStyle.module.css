@@ -8,4 +8,8 @@ body{
         color: white;
         background-color: #4db86b;
     }
+    svg {
+        height: 1.5em;
+        width: 1.5em;
+    }
 }
