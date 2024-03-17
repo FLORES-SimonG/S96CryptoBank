@@ -23,11 +23,14 @@ const Navbar = () => {
         
             <ul>
                 <li><Link to="/Home">Home</Link> </li>
+                {login &&<li><Link to="/Aboutyou">About You</Link> </li>}
                 {!login && <li><Link to="/login">Login</Link> </li>}
                 {!login && <li><Link to="/register">Register</Link> </li>}
                 {login && <li><Link to="/myappointments">My Appointments</Link> </li>}
+                <li><Link to="/AboutUs">About Us</Link> </li>
                 {login && <li><Link to="/" onClick={(event) => handleOnClickLogOut(event)}><GiExitDoor /></Link> </li>}
                 
+
             </ul>
             
         

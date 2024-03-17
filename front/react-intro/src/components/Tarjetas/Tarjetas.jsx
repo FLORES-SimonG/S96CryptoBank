@@ -2,6 +2,7 @@ import styles from "./TarjetasStyle.module.css"; //!asi se incorpora!
 const Tarjetas = () => {
   return (
     <>
+    <h2>Cryptocurrencies Available for Buying/Selling</h2>
       <div>
         <div className={styles.cards}>
           <div className={`${styles.card} ${styles.money}`}>

@@ -7,6 +7,9 @@ import Register from './view/Register/Register.jsx';
 import {Routes, Route} from 'react-router-dom';
 import Welcome from './view/welcome/Welcome.jsx';
 
+import AboutYou from './view/AboutYou/AboutYou.jsx';
+import AboutUs from './view/AboutUs/AboutUs.jsx';
+
 
 function App() {
   return (
@@ -18,6 +21,8 @@ function App() {
     <Route path="/myappointments" element={<MyAppointments/>}/>
     <Route path="/register" element={<Register/>}/>
     <Route path="/login" element={<Login/>}/>
+    <Route path='/aboutyou' element={<AboutYou/>}/>
+    <Route path='/aboutus' element={<AboutUs/>}/>
     
   
   </Routes>
