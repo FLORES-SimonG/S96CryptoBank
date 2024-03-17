@@ -179,7 +179,7 @@ const Register = () => {
                 }}
               />
             </div>
-            <button className={styles.sign}>Sign in</button>
+            <button className={styles.sign}>Register</button>
           </form>
         </div>
       </div>

@@ -21,6 +21,39 @@ a{
     text-align: center;
     
 }
+.logoPig{
+  display: flex;
+  
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+
+  .pig{
+    width: 100px;
+    height: 100px;
+    margin: 16px;
+    border-radius: 50%;
+    background-color: #4db86b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    font-size: 2rem;
+    font-weight: 700;
+    transition: 0.5s;
+  
+  }
+  .pig:hover{
+    background-color: #4db86b;
+    transform: scale(1.15, 1.15);
+    transition: 0.5s;
+    cursor: pointer;
+    box-shadow: black 0px 0px 10px 0px;
+  }
+}
+
 .welcomeCard {
   background-color: #4db86b;
   border-radius: 25px;

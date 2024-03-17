@@ -1,17 +1,10 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import styles from "../../view/Register/Register.module.css";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import styles from "../../view/Register/Register.module.css";
 import { setAppointments } from "../../redux/userSlice.js";
-
-import { useSelector } from "react-redux";
-
-import {
-  validateDate,
-  validateTime,
-  convertDate,
-} from "../../helpers/validateMyTurns";
+import { convertDate } from "../../helpers/validateMyTurns";
+import { validateMyTurns } from "../../helpers/validateMyTurns";
 
 const CreateAppointment = () => {
   const userId = useSelector((state) => state.actualUser.userData.user.id);
@@ -29,46 +22,61 @@ const CreateAppointment = () => {
   const handlerInputChangeFromCreateAppointment = (evento) => {
     const { name, value } = evento.target;
 
-    let newErrors = {};
-    if (name === "date") {
-      if (!validateDate(value)) {
-        newErrors[name] = "Fecha inválida. El formato debe ser YYYY-MM-DD.";
-      }
-    } else if (name === "time") {
-      if (!validateTime(value)) {
-        newErrors[name] = "Hora inválida. El formato debe ser HH:MM.";
-      }
-    }
-
     setItemsFromCreateAppointment({
       ...itemsFromCreateAppointment,
       [name]: value,
     });
-    setErrors({ ...errors, ...newErrors });
+
+    const itemsActualizadoFromCreateAppointment = {
+      ...itemsFromCreateAppointment,
+      [name]: value,
+    };
+    const newErrors = validateMyTurns(itemsActualizadoFromCreateAppointment);
+
+    if (newErrors[name]) {
+      setErrors({ ...errors, [name]: newErrors[name] });
+    } else {
+      const { [name]: value, ...remainingErrors } = errors;
+      setErrors(remainingErrors);
+    }
   };
 
   const handleOnSubmitFromCreateAppointment = async (evento) => {
     evento.preventDefault();
 
-    const newAppointment = {
-      ...itemsFromCreateAppointment,
-      date: convertDate(itemsFromCreateAppointment.date),
-      userId,
-    };
-    axios
-      .post("http://localhost:3000/appointments/schedule", newAppointment)
-      .then(({ data }) => data)
-      .then((appointmentInDB) => {
-        alert(
-          `Ha sido creada la nueva reserva: fecha: ${appointmentInDB.date}, hora: ${appointmentInDB.time}`
-        );
-        axios
-        .get(`http://localhost:3000/users/${userId}`)
-        .then((res) => {dispatch(setAppointments(res.data.appointments))})
-      })
-      .catch((error) => alert("ocurrio un error: " + error.message));
-  };
+    const newErrors = validateMyTurns(itemsFromCreateAppointment);
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      console.log("Errores en el formulario:", newErrors);
+      return alert(
+        "Complete el formulario correctamente para que EL TURNO SEA CREADO"
+      );
+    }
 
+    try {
+      console.log(newErrors);
+      const response = await axios.post(
+        "http://localhost:3000/appointments/schedule",
+        {
+          date: convertDate(itemsFromCreateAppointment.date),
+          time: itemsFromCreateAppointment.time,
+          userId: userId,
+        }
+      );
+
+      console.log("Respuesta del servidor:", response.data);
+
+      alert(
+        `Ha sido creada la nueva reserva: fecha: ${response.data.date}, hora: ${response.data.time}`
+      );
+      axios.get(`http://localhost:3000/users/${userId}`).then((res) => {
+        dispatch(setAppointments(res.data.appointments));
+      });
+    } catch (error) {
+      console.error("Error al enviar el formulario de APPOINTMENT:", error);
+      alert("Error al enviar el formulario, Hora o fecha incorrectos.");
+    }
+  };
 
   useEffect(() => {
     axios
