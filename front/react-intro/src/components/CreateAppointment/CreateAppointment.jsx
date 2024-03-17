@@ -49,7 +49,7 @@ const CreateAppointment = () => {
       setErrors(newErrors);
       console.log("Errores en el formulario:", newErrors);
       return alert(
-        "Complete el formulario correctamente para que EL TURNO SEA CREADO"
+        "Please complete the form correctly for THE APPOINTMENT TO BE CREATED"
       );
     }
 
@@ -67,14 +67,16 @@ const CreateAppointment = () => {
       console.log("Respuesta del servidor:", response.data);
 
       alert(
-        `Ha sido creada la nueva reserva: fecha: ${response.data.date}, hora: ${response.data.time}`
+        `The new reservation has been created: 
+        - DATE: ${response.data.date} 
+        - TIME: ${response.data.time}`
       );
       axios.get(`http://localhost:3000/users/${userId}`).then((res) => {
         dispatch(setAppointments(res.data.appointments));
       });
     } catch (error) {
       console.error("Error al enviar el formulario de APPOINTMENT:", error);
-      alert("Error al enviar el formulario, Hora o fecha incorrectos.");
+      alert("Error submitting the form, incorrect time or date");
     }
   };
 

@@ -3,9 +3,11 @@ import styles from "./Register.module.css";
 import axios from "axios";
 import { useState } from "react";
 import {  validateRegister } from "../../helpers/validateRegister";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const today = new Date().toISOString().split("T")[0];
+  const navigate = useNavigate();
   const [itemsFromRegister, setItemsFromRegister] = useState({
     name: "",
     email: "",
@@ -43,7 +45,7 @@ const Register = () => {
     const newErrors = validateRegister(itemsFromRegister);
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      return alert("Complete el formulario correctamente para que sea enviado");
+      return alert("Complete the form correctly for it to be submitted");
     }
 
     try {
@@ -62,10 +64,12 @@ const Register = () => {
       );
 
       console.log("Respuesta del servidor:", response.data);
-      alert("Formulario de REGISTER EXITOSO PA");
+      alert("Registration form SENT SUCCESSFULLY!");
+      navigate("/login");
+
     } catch (error) {
       console.error("Error al enviar el formulario de REGISTER:", error);
-      alert("Error al enviar el formulario, Usuario o contraseña incorrectos.");
+      alert("Error sending the registration form");
     }
   };
 

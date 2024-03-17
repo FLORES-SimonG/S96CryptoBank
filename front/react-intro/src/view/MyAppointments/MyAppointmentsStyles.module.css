@@ -7,6 +7,17 @@
         color: white;
         background-color: #4db86b;
     }
+    h3 {
+      color: whitesmoke;
+      background-color: #4db86b;
+      padding: 12px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 15px;
+      margin-top: 4px;
+      /* margin: 0px; */
+      
+  }
     
     .cards {
         display: flex;

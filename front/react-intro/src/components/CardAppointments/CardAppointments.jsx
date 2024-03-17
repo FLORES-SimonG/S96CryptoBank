@@ -5,7 +5,7 @@ import styles from '../../view/MyAppointments/MyAppointmentsStyles.module.css';
 const CardAppointments = ({ turno: { date, time, status } , handleAppointmentCancel,id}) => {
 
 const handleCancel = ()=>{
-  window.confirm("Are you sure you want to cancel this appointment?")?(handleAppointmentCancel(id), console.log("Cancelación cancelada", alert("Appointment canceled"))
+  window.confirm("Are you sure you want to cancel this appointment?")?(handleAppointmentCancel(id), console.log("Cancelación COMPLETA", alert("Appointment canceled"))
   ):(console.log("NO SE HA CANCELADO"));}
 
 

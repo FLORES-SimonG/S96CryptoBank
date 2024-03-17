@@ -50,7 +50,7 @@ const MyAppointments = () => {
       <CreateAppointment></CreateAppointment>
       <div>
         <h2>My Appointments</h2>
-        {/* <div className={styles.cards}></div> */}
+       
         <div className={styles.cards}>
           {activeUserAppointment.length ? (
             activeUserAppointment.map((appointment) => {

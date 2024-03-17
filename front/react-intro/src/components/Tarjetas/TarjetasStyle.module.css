@@ -26,6 +26,7 @@
       cursor: pointer;
       transition: 400ms;
       img{
+        margin: 8px;
         width: 100px;
         height: 100px;
        
@@ -46,6 +47,13 @@
     
     .cards .card p.secondText {
       font-size: .7em;
+  text-align: center;
+  overflow: auto; /* Agrega scroll al texto si es necesario */
+  word-wrap: break-word;
+  max-height: 100px;
+      
+      
+      
     }
     
     .cards .card:hover {

@@ -18,7 +18,6 @@ const Login = () => {
   const [errors, setErrors] = useState({});
 
 
-  //! Funcion MANEJADORA para el cambio de los inputs del formulario de LOGIN
   const handlerInputChangeFromLogin = (evento) => {
     //*OPCION 1:
     const { name, value } = evento.target;
@@ -43,7 +42,7 @@ const Login = () => {
     // } y así sucesivamente con password y lo que tenga el formulario.
   };
 
-  //! Funcion MANEJADORA para el submit del formulario de LOGIN
+
   const handleOnSubmitFromLogin = async (evento) => {
     evento.preventDefault();
 
@@ -51,7 +50,7 @@ const Login = () => {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       console.log("Errores en el formulario:", newErrors);
-      return alert("Complete el formulario correctamente para que sea enviado");
+      return alert("Please complete the form correctly for it to be submitted");
     }
 
     try {
@@ -62,11 +61,11 @@ const Login = () => {
 
       console.log("Respuesta del servidor:", response.data);
       dispatch(setUser(response.data));
-      alert("Formulario de LOGIN EXITOSO PA");
+      alert("Login form SENT SUCCESSFULLY");
       navigate("/home");
     } catch (error) {
       console.error("Error al enviar el formulario de LOGIN:", error);
-      alert("Error al enviar el formulario, Usuario o contraseña incorrectos.");
+      alert("Error submitting the form. Incorrect username or password");
     }
   };
 
