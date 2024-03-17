@@ -47,7 +47,7 @@ const Register = () => {
     }
 
     try {
-      // Realizar la petición POST con axios
+     
       console.log("Datos enviados al servidor:", itemsFromRegister);
       const response = await axios.post(
         "http://localhost:3000/users/register",
@@ -132,7 +132,7 @@ const Register = () => {
               <label>ID-CardNumber</label>
               <input
                 value={itemsFromRegister.nDni}
-                type="number" //! OJO ACÁ QUE PUEDO TENER PROBLEMA EN BACK
+                type="number" 
                 name="nDni"
                 id="nDni"
                 placeholder=""
