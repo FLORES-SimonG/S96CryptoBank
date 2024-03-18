@@ -105,6 +105,7 @@ const CreateAppointment = () => {
                 min={new Date().toISOString().split("T")[0]}
                 placeholder=""
                 onChange={handlerInputChangeFromCreateAppointment}
+                
                 style={{
                   transition: "2s",
                   backgroundColor: errors.birthdate
@@ -123,6 +124,8 @@ const CreateAppointment = () => {
                 placeholder=""
                 onChange={handlerInputChangeFromCreateAppointment}
                 step="900"
+                min="03:00"
+                max="23:00"
                 style={{
                   transition: "2s",
                   backgroundColor: errors.nDni
