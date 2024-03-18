@@ -49,7 +49,7 @@ const Login = () => {
     const newErrors = validateLogin(itemsFromLogin);
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      console.log("Errores en el formulario:", newErrors);
+      //! console.log("Errores en el formulario:", newErrors);
       return alert("Please complete the form correctly for it to be submitted");
     }
 
@@ -59,7 +59,7 @@ const Login = () => {
         password: itemsFromLogin.password,
       });
 
-      console.log("Respuesta del servidor:", response.data);
+      //! console.log("Respuesta del servidor:", response.data);
       dispatch(setUser(response.data));
       alert("Login form SENT SUCCESSFULLY");
       navigate("/home");

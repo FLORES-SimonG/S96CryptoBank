@@ -36,7 +36,7 @@ const MyAppointments = () => {
     (state) => state.actualUser.userAppointments
   ); //! ubicación de los appointments dentro del objeto
 
-  console.log(activeUserID);
+  // console.log(activeUserID);
 
   useEffect(() => {
     axios

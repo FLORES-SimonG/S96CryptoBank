@@ -50,7 +50,7 @@ const Register = () => {
 
     try {
      
-      console.log("Datos enviados al servidor:", itemsFromRegister);
+      //! console.log("Datos enviados al servidor:", itemsFromRegister);
       const response = await axios.post(
         "http://localhost:3000/users/register",
         {
@@ -63,7 +63,7 @@ const Register = () => {
         }
       );
 
-      console.log("Respuesta del servidor:", response.data);
+      //! console.log("Respuesta del servidor:", response.data);
       alert("Registration form SENT SUCCESSFULLY!");
       navigate("/login");
 

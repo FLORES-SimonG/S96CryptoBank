@@ -47,14 +47,14 @@ const CreateAppointment = () => {
     const newErrors = validateMyTurns(itemsFromCreateAppointment);
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      console.log("Errores en el formulario:", newErrors);
+      //! console.log("Errores en el formulario:", newErrors);
       return alert(
         "Please complete the form correctly for THE APPOINTMENT TO BE CREATED"
       );
     }
 
     try {
-      console.log(newErrors);
+      //! console.log(newErrors);
       const response = await axios.post(
         "http://localhost:3000/appointments/schedule",
         {
@@ -64,7 +64,7 @@ const CreateAppointment = () => {
         }
       );
 
-      console.log("Respuesta del servidor:", response.data);
+      //! console.log("Respuesta del servidor:", response.data);
 
       alert(
         `The new reservation has been created: 

@@ -7,7 +7,7 @@ import { GiExitDoor } from "react-icons/gi";
 const Navbar = () => {
     
     const login = useSelector((state)=>state.actualUser.userData.login)
-    console.log(login);
+    //! console.log(login);
     const handleOnClickLogOut = (event) => {
         return window.confirm("Are you sure you want to log out?")
         ?(login = useSelector((state)=>state.actualUser.userData.login = false), alert("You have been logged out"))
