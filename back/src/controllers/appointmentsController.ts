@@ -23,7 +23,7 @@ export const getAppointmentByIdController = async (req: Request,res: Response):P
       throw new Error("No se encontró el turno solicitado.");
     }
   } catch (error:any) {
-    res.status(400).json({ message: error.message });
+    res.status(404).json({ message: error.message });
   }
 };
 //!-----------------------------CREAR UN APPOINTMENT-------------------------------------------------------------------------
