@@ -2,6 +2,8 @@ import './NavbarStyle.module.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { GiExitDoor } from "react-icons/gi";
+import { IoHome } from "react-icons/io5";
+
 
 
 const Navbar = () => {
@@ -22,7 +24,7 @@ const Navbar = () => {
         
         
             <ul>
-                <li><Link to="/Home">Home</Link> </li>
+                <li><Link to="/Home"><IoHome /></Link> </li>
                 {login &&<li><Link to="/Aboutyou">About You</Link> </li>}
                 {!login && <li><Link to="/login">Login</Link> </li>}
                 {!login && <li><Link to="/register">Register</Link> </li>}

@@ -63,11 +63,7 @@ const Home = () => {
           </ul>
           <br></br>
           <ul>
-            But we don't stop there. We also pride ourselves on providing
-            exceptional customer service, available at all times to address your
-            concerns and assist you with any issues you may face. And best of
-            all, our registration and account opening process is completely
-            free, with no additional costs or unpleasant surprises.
+          However, we go beyond that. We take great pride in delivering outstanding customer service, accessible at all times to attend to your inquiries and help you resolve any challenges you encounter. Moreover, our registration and account opening procedure come at no charge, ensuring there are no unexpected expenses or unpleasant surprises.
           </ul>
           <br></br>
 
