@@ -1,5 +1,5 @@
 import { Router } from "express";
-import auth from "../middlewares/autenticacion";
+// import auth from "../middlewares/autenticacion";
 
 import {cancelAppointmentController, getAppointmentController, addAppointmentController,getAppointmentByIdController} from "../controllers/appointmentsController";
 
